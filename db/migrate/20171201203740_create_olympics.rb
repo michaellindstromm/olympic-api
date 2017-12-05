@@ -1,7 +1,7 @@
 class CreateOlympics < ActiveRecord::Migration[5.1]
   def change
     create_table :olympics do |t|
-      t.date :year
+      t.integer :year
       t.string :season
       t.references :city, index: true
 

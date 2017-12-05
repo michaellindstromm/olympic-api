@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20171204213447) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "athletes", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -22,7 +25,7 @@ ActiveRecord::Schema.define(version: 20171204213447) do
 
   create_table "cities", force: :cascade do |t|
     t.string "city_name"
-    t.integer "country_id"
+    t.bigint "country_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["country_id"], name: "index_cities_on_country_id"
@@ -37,7 +40,7 @@ ActiveRecord::Schema.define(version: 20171204213447) do
 
   create_table "disciplines", force: :cascade do |t|
     t.string "discipline_name"
-    t.integer "sport_id"
+    t.bigint "sport_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["sport_id"], name: "index_disciplines_on_sport_id"
@@ -46,7 +49,7 @@ ActiveRecord::Schema.define(version: 20171204213447) do
   create_table "events", force: :cascade do |t|
     t.string "event_name"
     t.string "gender"
-    t.integer "discipline_id"
+    t.bigint "discipline_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["discipline_id"], name: "index_events_on_discipline_id"
@@ -54,10 +57,10 @@ ActiveRecord::Schema.define(version: 20171204213447) do
 
   create_table "medals", force: :cascade do |t|
     t.string "rank"
-    t.integer "event_id"
-    t.integer "athlete_id"
-    t.integer "olympic_id"
-    t.integer "country_id"
+    t.bigint "event_id"
+    t.bigint "athlete_id"
+    t.bigint "olympic_id"
+    t.bigint "country_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["athlete_id"], name: "index_medals_on_athlete_id"
@@ -67,9 +70,9 @@ ActiveRecord::Schema.define(version: 20171204213447) do
   end
 
   create_table "olympics", force: :cascade do |t|
-    t.date "year"
+    t.integer "year"
     t.string "season"
-    t.integer "city_id"
+    t.bigint "city_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["city_id"], name: "index_olympics_on_city_id"

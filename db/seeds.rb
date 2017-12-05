@@ -64,8 +64,6 @@ summer_data = root_path + 'SUMMERMEDALS.csv'
 winter_data = root_path + 'WINTERMEDALS.csv'
 
 
-
-
 # POPULATE SPORTS TABLE
 csv_text = File.read(summer_data)
 csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
@@ -74,9 +72,7 @@ csv.each do |row|
     sport = row['Sport']
     discipline = row['Discipline']
     event = row ['Event']
-    sql = "select s.id from Sports s where s.sport_name = '#{sport}'"
-    results = ActiveRecord::Base.connection.execute(sql)
-    if results.present?
+    if Sport.exists?(:sport_name => sport)
     else
         s = Sport.new
         s.sport_name = row['Sport']
@@ -90,9 +86,7 @@ csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 
 csv.each do |row|
     sport = row['Sport']
-    sql = "select s.id from Sports s where s.sport_name = '#{sport}'"
-    results = ActiveRecord::Base.connection.execute(sql)
-    if results.present?
+    if Sport.exists?(:sport_name => sport)
     else
         s = Sport.new
         s.sport_name = row['Sport']
@@ -111,9 +105,7 @@ csv.each do |row|
     discipline = row['Discipline']
     event = row ['Event']
 
-    sql = "select d.id from Disciplines d, Sports s where d.discipline_name = '#{discipline}' and s.sport_name = '#{sport}'"
-    results = ActiveRecord::Base.connection.execute(sql)
-    if results.present?
+    if Sport.find_by(sport_name: sport).disciplines.exists?(discipline_name: discipline)
     else
         s = Sport.find_by(sport_name: sport).id
         d = Discipline.new
@@ -134,9 +126,7 @@ csv.each do |row|
     discipline = row['Discipline']
     event = row ['Event']
 
-    sql = "select d.id from Disciplines d, Sports s where d.discipline_name = '#{discipline}' and s.sport_name = '#{sport}'"
-    results = ActiveRecord::Base.connection.execute(sql)
-    if results.present?
+    if Sport.find_by(sport_name: sport).disciplines.exists?(discipline_name: discipline)
     else
         s = Sport.find_by(sport_name: sport).id
         d = Discipline.new
@@ -159,15 +149,11 @@ csv.each do |row|
     event = row['Event']
     gender = row['Gender']
 
-    sql = "select e.id from Events e, Disciplines d, Sports s where e.event_name = '#{event}' and d.discipline_name = '#{discipline}' and e.gender='#{gender}' and s.sport_name='#{sport}'"
-    results = ActiveRecord::Base.connection.execute(sql)
-    if results.present?
+    if Discipline.find_by(discipline_name: discipline).events.exists?(event_name: event, gender: gender)
     else
-        sql = "select d.id from Sports s, Disciplines d where s.sport_name = '#{sport}' and d.discipline_name = '#{discipline}'"
-        results = ActiveRecord::Base.connection.execute(sql)
         e = Event.new
         e.event_name = event
-        e.discipline_id = results[0][0]
+        e.discipline_id = Discipline.find_by(discipline_name: discipline).id
         e.gender = row['Gender']
         e.save
     end
@@ -185,15 +171,11 @@ csv.each do |row|
     event = row['Event']
     gender = row['Gender']
 
-    sql = "select e.id from Events e, Disciplines d, Sports s where e.event_name = '#{event}' and d.discipline_name = '#{discipline}' and e.gender='#{gender}' and s.sport_name='#{sport}'"
-    results = ActiveRecord::Base.connection.execute(sql)
-    if results.present?
+    if Discipline.find_by(discipline_name: discipline).events.exists?(event_name: event, gender: gender)
     else
-        sql = "select d.id from Sports s, Disciplines d where s.sport_name = '#{sport}' and d.discipline_name = '#{discipline}'"
-        results = ActiveRecord::Base.connection.execute(sql)
         e = Event.new
         e.event_name = event
-        e.discipline_id = results[0][0]
+        e.discipline_id = Discipline.find_by(discipline_name: discipline).id
         e.gender = row['Gender']
         e.save
     end
@@ -243,7 +225,7 @@ csv.each do |row|
     else
         olympics_summer_dict[row['Year']] = 1
         o = Olympic.new
-        o.year = Date.new(row['Year'].to_i).year
+        o.year = row['Year'].to_i
         o.season = 'Summer'
         o.city_id = City.find_by(city_name: row['City']).id
         o.save
@@ -262,7 +244,7 @@ csv.each do |row|
     else
         olympics_winter_dict[row['Year']] = 1
         o = Olympic.new
-        o.year = Date.new(row['Year'].to_i).year
+        o.year = row['Year'].to_i
         o.season = 'Winter'
         o.city_id = City.find_by(city_name: row['City']).id
         o.save
@@ -365,7 +347,7 @@ csv.each do |row|
     event = row['Event']
     gender = row['Gender']
     noc = row['Country']
-    year = Date.new(row['Year'].to_i).year
+    year = row['Year'].to_i
     discipline_key = sport + discipline
     first_name = '-'
     last_name = '-'
@@ -381,39 +363,13 @@ csv.each do |row|
 
     end
 
-    if first_name.include?("'")
-        first_name.insert(first_name.index("'"), "'")
-    end
-    
-    if last_name.include?("'")
-        last_name.insert(last_name.index("'"), "'")
-    end
-
-    sql = "select e.id from Events e, Disciplines d, Sports s where e.event_name = '#{event}' and d.discipline_name = '#{discipline}' and e.gender='#{gender}' and s.sport_name='#{sport}'"
-    results = ActiveRecord::Base.connection.execute(sql)
-    event_id = results[0][0]
-
-
-    sql = "select e.id as 'event_id', a.id as 'athlete_id', o.id as 'olympic_id', cn.id as 'country_id'
-    from Events e, Athletes a, Olympics o, Countries cn
-    where e.id = #{event_id}
-    and a.first_name = '#{first_name}' and a.last_name = '#{last_name}' 
-    and cn.noc = '#{noc}' 
-    and o.year = #{year} and o.season = 'Summer'
-    "
-    results = ActiveRecord::Base.connection.execute(sql)
-
-    if results.present?
-
-        m = Medal.new
-        m.rank = row['Medal']
-        m.event_id = results[0][0]
-        m.athlete_id = results[0][1]
-        m.olympic_id = results[0][2]
-        m.country_id = results[0][3]
-        m.save
-        
-    end
+    m = Medal.new
+    m.rank = row['Medal']
+    m.event_id = Event.find_by(event_name: event).id
+    m.athlete_id = Athlete.find_by(first_name: first_name, last_name: last_name, gender: gender).id
+    m.olympic_id = Olympic.find_by(year: year).id
+    m.country_id = Country.find_by(noc: noc).id
+    m.save
 
 end
 
@@ -427,7 +383,7 @@ csv.each do |row|
     event = row['Event']
     gender = row['Gender']
     noc = row['Country']
-    year = Date.new(row['Year'].to_i).year
+    year = row['Year'].to_i
 
     discipline_key = sport + discipline
     first_name = '-'
@@ -444,38 +400,12 @@ csv.each do |row|
 
     end
 
-    if first_name.include?("'")
-        first_name.insert(first_name.index("'"), "'")
-    end
-    
-    if last_name.include?("'")
-        last_name.insert(last_name.index("'"), "'")
-    end
-
-    sql = "select e.id from Events e, Disciplines d, Sports s where e.event_name = '#{event}' and d.discipline_name = '#{discipline}' and e.gender='#{gender}' and s.sport_name='#{sport}'"
-    results = ActiveRecord::Base.connection.execute(sql)
-    event_id = results[0][0]
-
-
-    sql = "select e.id as 'event_id', a.id as 'athlete_id', o.id as 'olympic_id', cn.id as 'country_id'
-    from Events e, Athletes a, Olympics o, Countries cn
-    where e.id = #{event_id}
-    and a.first_name = '#{first_name}' and a.last_name = '#{last_name}' 
-    and cn.noc = '#{noc}' 
-    and o.year = #{year} and o.season = 'Winter'
-    "
-    results = ActiveRecord::Base.connection.execute(sql)
-
-    if results.present?
-
-        m = Medal.new
-        m.rank = row['Medal']
-        m.event_id = results[0][0]
-        m.athlete_id = results[0][1]
-        m.olympic_id = results[0][2]
-        m.country_id = results[0][3]
-        m.save
-
-    end
+    m = Medal.new
+    m.rank = row['Medal']
+    m.event_id = Event.find_by(event_name: event).id
+    m.athlete_id = Athlete.find_by(first_name: first_name, last_name: last_name, gender: gender).id
+    m.olympic_id = Olympic.find_by(year: year).id
+    m.country_id = Country.find_by(noc: noc).id
+    m.save
 
 end
