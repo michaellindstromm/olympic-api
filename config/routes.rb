@@ -7,7 +7,7 @@
 # in the 'app' subdirectory and no extra path is necessary.
 # 
 # API endpoints are scoped under the 'api' subdirectory with the default
-# format is set to JSON. Under the 'api' subdirectory are each of the
+# format set to JSON. Under the 'api' subdirectory are each of the
 # version subdirectories entitled ('v1', 'v2', etc). Paths for both API 
 # and specific versions are removed so end user only has to put '/sports'
 # instead of '/api/v1/sports' for example. Constraints are defined for 
