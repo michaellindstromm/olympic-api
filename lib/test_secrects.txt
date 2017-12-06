@@ -1,1 +1,3 @@
-Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1MTI1OTc2OTV9.N3-kHkC4k36vwH-xB3P--UCL4IszlNbyr0k4hwo3NHA
+Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo2LCJleHAiOjE1MTI2MjU4MTB9.mxhmQBzHfa15MsA2h885O7UJAOL5H23tO7LDRUE7kmo
+email: mike@jones.com
+password: 123123123

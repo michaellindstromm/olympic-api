@@ -28,6 +28,8 @@ OlympicApi::Application.routes.draw do
 
   scope module: :app, path: '/' do
     root 'home#index'
+
+    resources :users, :only => [:create, :new]
   end
 
   post 'authenticate', to: 'authentication#authenticate'
