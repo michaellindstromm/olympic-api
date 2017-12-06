@@ -154,7 +154,7 @@ csv.each do |row|
         e = Event.new
         e.event_name = event
         e.discipline_id = Discipline.find_by(discipline_name: discipline).id
-        e.gender = row['Gender']
+        e.gender = gender
         e.save
     end
         
