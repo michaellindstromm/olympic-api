@@ -7,7 +7,7 @@ module Api::V1
             obj = {}
             obj[:meta] = {
                 "pagination": {
-                    "page": 1,
+                    "page": params[:page],
                     # "per_page": sports.per(), 
                     "total_pages": sports.total_pages,
                     "total_objects": sports.total_count 
