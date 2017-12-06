@@ -37,12 +37,15 @@ OlympicApi::Application.routes.draw do
     scope module: :v1, as: 'v1', path: '/' do
       constraints(ApiConstraints.new({version: 1})) do
         resources :sports, :only => [:index, :show]
+        resources :olympics, :only => [:index, :show]
       end
     end
 
     scope module: :v2, as: 'v2', path: '/'  do
       constraints(ApiConstraints.new({version: 2, default: true})) do
         resources :sports, :only => [:index, :show]
+        resources :olympics, :only => [:index, :show]
+        resources :countries, :only => [:index, :show]
       end
     end
   end
