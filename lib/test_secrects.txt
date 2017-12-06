@@ -1,3 +1,10 @@
-Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo2LCJleHAiOjE1MTI2MjU4MTB9.mxhmQBzHfa15MsA2h885O7UJAOL5H23tO7LDRUE7kmo
+Production
+
+Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1MTI2MzAyMzB9.4mDxarRd1V4KyYQN0pyxbIxVIe6rqM-qkZgcyGCB8sI
 email: mike@jones.com
+password: 123123123
+
+Development
+Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1MTI2NTYxODR9.Nk89ZeB6FssY74OP-G-7wan4JM8SptQqiUJ4QA1dygA
+email: a@a.com
 password: 123123123
