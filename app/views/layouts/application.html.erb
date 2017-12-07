@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
   <head>
     <title>Olympic API</title>
     <!-- needed for adaptive design -->
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Meta -->
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true%>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 
     <!--
     ReDoc doesn't change outer page styles
@@ -16,7 +20,7 @@
       }
     </style>
   </head>
-  <body>
+  <body data-spy="scroll" data-target="#sidebar" data-offset="250">
     <%= yield %>
   </body>
 </html>

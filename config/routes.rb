@@ -29,7 +29,8 @@ OlympicApi::Application.routes.draw do
   scope module: :app, path: '/' do
     root 'home#index'
 
-    resources :users, :only => [:create, :new]
+    get 'sign_up', to: 'users#new'
+    post 'first_token', to: 'users#create'
   end
 
   post 'authenticate', to: 'authentication#authenticate'

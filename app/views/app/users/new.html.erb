@@ -2,15 +2,28 @@
 
 <h1>Signup!</h1>
 
-<%= form_for :user, url: users_path do |f| %>
 
-  First Name: <%= f.text_field :first_name %>
-  Last Name: <%= f.text_field :last_name %>
-  Email: <%= f.text_field :email %>
-  Password: <%= f.password_field :password %>
-  Password Confirmation: <%= f.password_field :password_confirmation %>
-  <%= f.submit "Submit" %>
 
+<%= form_for :user, url: first_token_path, remote: true do |f| %>
+    <div class="col-md-8 mx-auto">
+        <%= f.label :first_name %></br>
+        <%= f.text_field  :first_name, required: true, class: "form-control" %></br>
+
+        <%= f.label :last_name %></br>
+        <%= f.text_field  :last_name, required: true, class: "form-control" %></br>
+
+        <%= f.label :email %></br>
+        <%= f.email_field :email, required: true, class: "form-control" %></br>
+
+        <%= f.label :password %></br>
+        <%= f.password_field :password, required: true, class: "form-control" %></br>
+
+        <%= f.label :password_confirmation %></br>
+        <%= f.password_field :password_confirmation, required: true, class: "form-control" %></br>
+
+
+        <%= f.submit 'Get First Token', class: 'btn btn-primary form-control' %>
+    </div>
 <% end %>
 
-<%= link_to 'Back', :back %>
+<%= link_to 'Back', root_path %>

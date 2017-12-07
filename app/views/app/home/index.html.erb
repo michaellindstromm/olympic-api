@@ -1,3 +1,98 @@
-<h1>Hello</h1>
+<div class="container-fluid">
+        <div class="col-2 left-nav pt-2">
+            <%= image_tag('Olympic-Rings.png', class: 'olympic-rings')%>
+            <div class="navbar" id="sidebar">
+                <ul class="nav nav-tabs d-flex flex-column align-content-start" role="tablist">
+                    <li a class="nav-item"><a class="nav-link active" href="#overview">Overview</a></li>
+                    <li a class="nav-item"><a class="nav-link" href="#access">Access</a></li>
+                    <li a class="nav-item"><a class="nav-link" href="#versioning">Versioning</a></li>
+                    <li a class="nav-item"><a class="nav-link" href="#routes">Routes</a></li>
+                    <li a class="nav-item"><a class="nav-link" href="#security">Security</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-5 center-content pt-2">
+            <div class="row">
+                <div class="col-12 center-desc">
+                    <div class="api-title d-flex align-items-end">
+                        <h1 class="display-3">Olympic API</h1>
+                        <span class="pb-3 pl-2 lead">v2</span>
+                    </div>
+                    <p class="lead">API allowing access to historical Olympic Data from 1896-2014.</p>
+                    <hr>
+                    <section id="overview">
+                        <h3 class="display-4">Overview</h3>
+                        <p class="lead">The Olympic API is architected around REST. All requests should be made over SSL. The API endpoints return data in JSON format. Current version requests return data about Olympics, Sports, Events, Athletes, and Medals.</p>
+                    </section>
+                    <hr>
+                    <section id="access">
+                        <h3 class="display-4">Access</h3>
+                        <p>Gain access to the endpoints by <%= link_to 'signing up', sign_up_path %>. Upon successful sign up, a JSON Web Token will be provided to you. This token must be provided in the header of every subsequent request like so: </p>
 
-<%= link_to 'Sign Up', new_user_path %>
+                        <div class="code-example d-flex align-content-center justify-content-center py-2 text-center my-4">
+                            <p class="my-auto mx-2">"Authorization: [WEB TOKEN GOES HERE]"</p>
+                        </div>
+
+                        <p>Tokens expire every 2 hours. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <span class="code-example px-2">/authorize</span> <a href="#routes">endpoint</a>. Including in the body of your request the email and password used when signing up.</p> 
+                        <p class="font-weight-bold">Note: this request does not require a token.</p>
+
+                        <div class="code-example d-flex align-content-center justify-content-center py-2 text-center my-4">
+                            <pre class="my-auto mx-2">curl -X POST -d '{"email":"[EMAIL]","password":"[PASSWORD]"}' https://olympicsapi.herokuapp.com/authorize</pre>
+                        </div>
+
+                        <p>Once this request is made and your credentials are verified, you will recieve a response that looks like this, containing your new token.</p>
+
+                        <div class="code-example d-flex align-content-center justify-content-center py-2 text-center my-4">
+                            <pre class="my-auto mx-2">{"auth_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE0NjA2NTgxODZ9.xsSwcPC22IR71OBv6bU_OGCSyfE89DvEzWfDU0iybMA"}</pre>
+                        </div>
+
+                    </section>
+                    <section id="versioning">
+                        <h3 class="display-4">Versioning</h3>
+                        <p class="lead">The most current version of the API is version 2.</p>
+                        <p class="font-weight-bold">It is highly recommended to explicitly state the version you wish to work with, even if it is the current version.</p>
+                        <p class="font-weight-bold">The default version will always be the most recent version, therefore without explicitly stating the version you want, if a new version is released your application may break.</p>
+                        <p>To request a specific version of the API, simply add an <span class="code-example px-2">Accept</span> header to your request. Here is an example of what an actual request may look like:</p>
+
+                        <div class="code-example d-flex align-content-center justify-content-center py-2 text-center my-4">
+                            <pre class="my-auto mx-2">
+                                curl -H "Authorize: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE0NjA2NTgxODZ9.xsSwcPC22IR71OBv6bU_OGCSyfE89DvEzWfDU0iybMA" -H "Accept: version=v2" https://olympicapi.herokuapp.com/sports
+                            </pre>
+                        </div>
+
+
+                    </section>
+                    <section id="routes">
+                        <h3 class="display-4">Routes</h3>
+                        
+                    </section>
+                    <section id="security">
+                        <h3 class="display-4">Security</h3>
+                        <p>Tokens expire every 2 hours. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <span></span></p>
+                        <p>Tokens expire every 2 hours. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <span></span></p>
+                        <p>Tokens expire every 2 hours. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <span></span></p>
+                        <p>Tokens expire every 2 hours. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <span></span></p>
+                        <p>Tokens expire every 2 hours. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <span></span></p>
+                        <p>Tokens expire every 2 hours. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <span></span></p>
+                        <p>Tokens expire every 2 hours. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <span></span></p>
+                        <p>Tokens expire every 2 hours. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <span></span></p>
+                        <p>Tokens expire every 2 hours. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <span></span></p>
+                        <p>Tokens expire every 2 hours. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <span></span></p>
+                        <p>Tokens expire every 2 hours. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <span></span></p>
+                        <p>Tokens expire every 2 hours. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <span></span></p>
+                        <p>Tokens expire every 2 hours. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <span></span></p>
+                        <p>Tokens expire every 2 hours. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <span></span></p>
+                        <p>Tokens expire every 2 hours. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <span></span></p>
+                        <p>Tokens expire every 2 hours. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <span></span></p>
+                        <p>Tokens expire every 2 hours. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <span></span></p>
+                        <p>Tokens expire every 2 hours. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <span></span></p>
+                    </section>
+                    
+                    <%= link_to 'Sign Up', sign_up_path %>
+                </div>
+            </div>
+        </div>
+        <div class="col-4 right-example pt-2">
+            <p class="lead text-white">Example</p>
+        </div>
+</div>

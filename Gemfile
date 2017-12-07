@@ -8,6 +8,7 @@ end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
+gem 'sprockets-rails', :require => 'sprockets/railtie'
 gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
@@ -47,3 +48,6 @@ gem 'active_model_serializers'
 gem 'kaminari'
 gem 'foreman'
 gem 'api-pagination'
+gem 'bootstrap'
+gem 'jquery-rails'
+gem 'turbolinks', '~> 5.0.0'

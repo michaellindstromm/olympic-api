@@ -1,0 +1,86 @@
+.left-nav {
+    position: fixed;
+    max-width: 20%;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: $center-background;
+}
+
+.right-example {
+    position: fixed;
+    max-width: 38%;
+    top: 0;
+    right: 0;
+    height: 100%;
+    background-color: $right-background;
+}
+
+.center-desc {
+    background-color: $center-background;
+}
+
+.center-content {
+    // border-left: 1px solid rgba(0, 0, 0, 0.1);
+    position: absolute;
+    left: 20%;
+    top: 0;
+}
+
+.olympic-rings {
+    width: 100%;
+    min-height: 10%;
+    max-height: 140px;
+}
+
+.code-example {
+    background-color: $code-example-background;
+    color: $code-example-text;
+    border-radius: 3px;
+}
+
+.hidden {
+    display: none;
+}
+
+.nav-tabs,
+.nav-link,
+.nav-item,
+.nav-link.active {
+    border: none;
+    border-radius: none;
+}
+
+.nav-link {
+    color: grey;
+}
+
+.nav-link:hover {
+    color: inherit;
+    border: none;
+    padding: none;
+    padding: 0.5rem 1rem;
+    margin-bottom: 2px;
+}
+
+.nav-link.active:hover {
+    margin-bottom: 0;
+}
+
+.nav-item {
+    border-left: 2px solid grey;
+}
+
+
+.nav-item > .nav-link.active {
+    margin-left: -2px;
+    border: none;
+    color: black;
+    border-radius: 0px;
+    border-left: 2px solid black;
+}
+
+section {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}

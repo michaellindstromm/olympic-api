@@ -11,7 +11,9 @@ class Api::V2::CountriesController < ApplicationController
     end
 
     def show
+        country = Country.find(params[:id])
 
+        render json: build_country(country)
     end
 
     private
@@ -58,6 +60,27 @@ class Api::V2::CountriesController < ApplicationController
         end
 
         def build_country(country)
+
+            obj = {}
+
+            olympics = {}
+
+            country.olympics.each do |o|
+                olympics[o.id] = {
+                    "olympic_id": o.id,
+                    "year": o.year,
+                    "season": o.season,
+                    "city": o.city.city_name
+                } 
+            end
+
+            obj["results"] = {}
+
+            obj["results"][country.id] = {
+                "country_id": country.id,
+                "country_name": country.country_name,
+                "olympics_hosted": olympics
+            }
 
         end
 
