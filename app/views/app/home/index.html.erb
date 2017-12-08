@@ -27,21 +27,28 @@
                     <hr>
                     <section id="access">
                         <h3 class="display-4">Access</h3>
+                        <h3 class="my-2">Tokens</h3>
                         <p>Gain access to the endpoints by <%= link_to 'signing up', sign_up_path %>. Upon successful sign up, a JSON Web Token will be provided to you. This token must be provided in the header of every subsequent request like so: </p>
 
                         
-                        <code class="my-2">"Authorization: [WEB TOKEN GOES HERE]"</code>
+                        <code class="my-4">"Authorization: [WEB TOKEN GOES HERE]"</code>
                         
 
-                        <p class="mt-4">Tokens expire every hour. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <code>/authenticate</code> <a href="#routes">endpoint</a>. Including in the body of your request the email and password used when signing up.</p> 
+                        <p class="mt-4"><span style="font-weight:bold">Tokens expire every hour</span>. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <code>/authenticate</code> <a href="#routes">endpoint</a>. Including in the body of your request the email and password used when signing up.</p> 
                         <p class="font-weight-bold">Note: this request does not require a token.</p>
 
-                        <code class="my-2">'{"email":"[YOUR EMAIL HERE]","password":"[YOUR PASSWORD HERE]"}'</code>
+                        <code class="mt-2">"email":"[YOUR EMAIL HERE]"</code>
+                        <code class="mb-2">"password":"[YOUR PASSWORD HERE]"</code>
 
                         <p class="mt-4">Once this request is made and your credentials are verified, you will recieve a response that looks like this, containing your new token.</p>
 
                         
                         <code class="my-2 overflow-x">{"auth_token":"[YOUR NEW JSON WEB TOKEN]"}</code>
+
+                        <h3 class="my-4">Rate Throttling</h3>
+                        <p>Requests are limited to 10 calls per second per IP Address. If you reach your rate limit you will see this response and will have to wait for your rate limit to reset.</p>
+
+                        <code>Rate limit reached. Please wait until throttle is reset.</code>
                         
 
                     </section>
@@ -92,6 +99,11 @@
                                     <td><code>Not Authorized</code></td>
                                     <td> - Verify your token is correct.
                                     <p> - Make a <code>POST</code> request for a new token.</p></td>
+                                </tr>
+                                <tr>
+                                    <td>GET</td>
+                                    <td><code>Rate Limit Reached</code></td>
+                                    <td> - Wait until rate limit resets.</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -162,11 +174,30 @@
                         <div id="endpoints">
                             <h3 class="mt-4">Endpoints</h3>
                             <p>Data is accessible through the following endpoints at the root url below.</p>
+                            <p class="lead">https://olympicapi.herokuapp.com</p>
+                            <h4 class="mt-4">POST</h4>
                             <table class="table endpoints-table">
                                 <thead>
+                                        <tr>
+                                            <th>Category</th>
+                                            <th>Endpoint</th>
+                                            <th>Parameter</th>
+                                            <th>Description</th>
+                                        </tr>
+                                </thead>
+                                <tbody>
                                     <tr>
-                                        <p class="lead">https://olympicapi.herokuapp.com</p>
-                                    <tr>
+                                        <td>Authentication</td>
+                                        <td><code>/authenticate</code></td>
+                                        <td> <code>email</code> as string
+                                        <p> <code>password</code> as string </p> </td>
+                                        <td>Get new JSON Web Token.</td>
+                                    </tr>
+                                </tbody>
+                            <table>
+                            <h4 class="mt-4">GET</h4>
+                            <table class="table endpoints-table">
+                                <thead>
                                     <tr>
                                         <th>Category</th>
                                         <th>Endpoint</th>
