@@ -7,6 +7,10 @@
     background-color: $center-background;
 }
 
+.center-desc {
+    background-color: $center-background;
+}
+
 .right-example {
     position: fixed;
     max-width: 38%;
@@ -14,11 +18,9 @@
     right: 0;
     height: 100%;
     background-color: $right-background;
+    box-shadow: -5px 5px 5px;
 }
 
-.center-desc {
-    background-color: $center-background;
-}
 
 .center-content {
     // border-left: 1px solid rgba(0, 0, 0, 0.1);
@@ -74,6 +76,8 @@
 
 .nav-item > .nav-link.active {
     margin-left: -2px;
+    padding-left: 17px;
+    padding-bottom: 9px;
     border: none;
     color: black;
     border-radius: 0px;
@@ -83,4 +87,100 @@
 section {
     padding-top: 1rem;
     padding-bottom: 1rem;
+}
+
+.ajax-example {
+    overflow-x: scroll;
+}
+
+pre {
+    text-align: left;
+    white-space: pre-line;
+}
+
+.overflow-x {
+    overflow-x: scroll;
+}
+
+.v-ex {
+    width: 100%;
+    background-color: black;
+}
+
+.version-example1 {
+    position: relative;
+    left: 0;
+    top: 0;
+}
+
+.version-example1 {
+    position: relative;
+    left: 50%;
+    top: 0;
+}
+
+.endpoint-header {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background-color: $endpoint-header-background;
+}
+
+pre.light-example-block {
+    padding: 0.2rem 0.4rem;
+    font-size: 90%;
+    color: #bd4147;
+    background-color: $light-code-block;
+    border-radius: 0.25rem;
+}
+
+.code-block {
+    width: 100%;
+    background-color: $light-code-block;
+}
+
+.code-block-dark {
+    border-radius: 3px;
+    background-color: $dark-code-block;
+}
+
+.code-block-dark pre {
+    color: $dark-code-font;
+    font-size: 0.8rem;
+}
+
+.code-block-dark pre code span.key {
+    color: $dark-code-key; 
+}
+
+.code-block-dark pre code span.number {
+    color: $dark-code-number; 
+}
+
+.code-block-dark pre code span.subkey {
+    color: $dark-code-subkey; 
+}
+
+.dark-code-headers {
+    color: $dark-code-font;
+}
+
+.qjquery {
+    color: $qjquery;
+}
+
+.qstring {
+    color: $qstring;
+}
+
+.qmethod {
+    color: $qmethod;
+}
+
+.qgreen {
+    color: $qgreen;
+}
+
+.qblue {
+    color: $qblue;
 }

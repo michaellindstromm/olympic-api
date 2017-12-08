@@ -6,8 +6,8 @@
                     <li a class="nav-item"><a class="nav-link active" href="#overview">Overview</a></li>
                     <li a class="nav-item"><a class="nav-link" href="#access">Access</a></li>
                     <li a class="nav-item"><a class="nav-link" href="#versioning">Versioning</a></li>
-                    <li a class="nav-item"><a class="nav-link" href="#routes">Routes</a></li>
-                    <li a class="nav-item"><a class="nav-link" href="#security">Security</a></li>
+                    <li a class="nav-item"><a class="nav-link" href="#errors">Errors</a></li>
+                    <li a class="nav-item dropdown"><a class="nav-link" href="#routes">Routes</a></li>
                 </ul>
             </div>
         </div>
@@ -29,70 +29,287 @@
                         <h3 class="display-4">Access</h3>
                         <p>Gain access to the endpoints by <%= link_to 'signing up', sign_up_path %>. Upon successful sign up, a JSON Web Token will be provided to you. This token must be provided in the header of every subsequent request like so: </p>
 
-                        <div class="code-example d-flex align-content-center justify-content-center py-2 text-center my-4">
-                            <p class="my-auto mx-2">"Authorization: [WEB TOKEN GOES HERE]"</p>
-                        </div>
+                        
+                        <code class="my-2">"Authorization: [WEB TOKEN GOES HERE]"</code>
+                        
 
-                        <p>Tokens expire every 2 hours. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <span class="code-example px-2">/authorize</span> <a href="#routes">endpoint</a>. Including in the body of your request the email and password used when signing up.</p> 
+                        <p class="mt-4">Tokens expire every hour. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <code>/authenticate</code> <a href="#routes">endpoint</a>. Including in the body of your request the email and password used when signing up.</p> 
                         <p class="font-weight-bold">Note: this request does not require a token.</p>
 
-                        <div class="code-example d-flex align-content-center justify-content-center py-2 text-center my-4">
-                            <pre class="my-auto mx-2">curl -X POST -d '{"email":"[EMAIL]","password":"[PASSWORD]"}' https://olympicsapi.herokuapp.com/authorize</pre>
-                        </div>
+                        <code class="my-2">'{"email":"[YOUR EMAIL HERE]","password":"[YOUR PASSWORD HERE]"}'</code>
 
-                        <p>Once this request is made and your credentials are verified, you will recieve a response that looks like this, containing your new token.</p>
+                        <p class="mt-4">Once this request is made and your credentials are verified, you will recieve a response that looks like this, containing your new token.</p>
 
-                        <div class="code-example d-flex align-content-center justify-content-center py-2 text-center my-4">
-                            <pre class="my-auto mx-2">{"auth_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE0NjA2NTgxODZ9.xsSwcPC22IR71OBv6bU_OGCSyfE89DvEzWfDU0iybMA"}</pre>
-                        </div>
+                        
+                        <code class="my-2 overflow-x">{"auth_token":"[YOUR NEW JSON WEB TOKEN]"}</code>
+                        
 
                     </section>
+                    <hr>
                     <section id="versioning">
                         <h3 class="display-4">Versioning</h3>
                         <p class="lead">The most current version of the API is version 2.</p>
                         <p class="font-weight-bold">It is highly recommended to explicitly state the version you wish to work with, even if it is the current version.</p>
                         <p class="font-weight-bold">The default version will always be the most recent version, therefore without explicitly stating the version you want, if a new version is released your application may break.</p>
-                        <p>To request a specific version of the API, simply add an <span class="code-example px-2">Accept</span> header to your request. Here is an example of what an actual request may look like:</p>
+                        <p>To request a specific version of the API, simply add an <code>Accept</code> header to your request.</p>
+                        
+                        <code class="my-2">"Accept: version-v2"</code>
 
-                        <div class="code-example d-flex align-content-center justify-content-center py-2 text-center my-4">
-                            <pre class="my-auto mx-2">
-                                curl -H "Authorize: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE0NjA2NTgxODZ9.xsSwcPC22IR71OBv6bU_OGCSyfE89DvEzWfDU0iybMA" -H "Accept: version=v2" https://olympicapi.herokuapp.com/sports
-                            </pre>
+
+                    </section>
+                    <hr>
+                    <section id="errors">
+                        <h3 class="display-4 mb-4">Errors</h3>
+                        
+                        <table class="table table-responsive errors-table">
+                            <thead>
+                                <tr>
+                                    <th>Request</th>
+                                    <th>Error</th>
+                                    <th>Corrective Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>POST</td>
+                                    <td><code>Invalid Credentials</code></td>
+                                    <td> - Verify your email and password are correct.</td>
+                                </tr>
+                                <tr>
+                                    <td>GET</td>
+                                    <td><code>Missing Token</code></td>
+                                    <td> - The <code>Authorization</code> header is missing or misspelled.
+                                    <p> - Verify there is a space after the colon.</p></td>
+                                </tr>
+                                <tr>
+                                    <td>GET</td>
+                                    <td><code>Invalid Token</code></td>
+                                    <td> - Verify your token is correct.
+                                    <p> - Make a <code>POST</code> request for a new token.</p></td>
+                                </tr>
+                                <tr>
+                                    <td>GET</td>
+                                    <td><code>Not Authorized</code></td>
+                                    <td> - Verify your token is correct.
+                                    <p> - Make a <code>POST</code> request for a new token.</p></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </section>
+                    <hr>
+                    <section id="routes">
+                        <h3 class="display-4 mb-4">Routes</h3>
+                        <div id="pagination">
+                            <h3>Pagination</h3>
+                            <p class="mt-4">All requests for multiple records are paginated.</p>
+
+                            <table class="table parameters-table">
+                                <thead>
+                                    <tr>
+                                        <th>Parameter</th>
+                                        <th>Default</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Page</td>
+                                        <td><code>1</code></td>
+                                        <td>Specifies specific page.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Per Page</td>
+                                        <td><code>25</code></td>
+                                        <td>Specifies the number of results per page.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <p class="my-4">Here is what an example end point with these parameters may look like:</p>
+
+                            <code>https://olympicapi.herokuapp.com/countries?page=2&per_page=30</code>
                         </div>
 
+                        <div id="format">
+                            <h3 class="my-4">Format</h3>
 
-                    </section>
-                    <section id="routes">
-                        <h3 class="display-4">Routes</h3>
-                        
-                    </section>
-                    <section id="security">
-                        <h3 class="display-4">Security</h3>
-                        <p>Tokens expire every 2 hours. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <span></span></p>
-                        <p>Tokens expire every 2 hours. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <span></span></p>
-                        <p>Tokens expire every 2 hours. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <span></span></p>
-                        <p>Tokens expire every 2 hours. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <span></span></p>
-                        <p>Tokens expire every 2 hours. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <span></span></p>
-                        <p>Tokens expire every 2 hours. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <span></span></p>
-                        <p>Tokens expire every 2 hours. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <span></span></p>
-                        <p>Tokens expire every 2 hours. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <span></span></p>
-                        <p>Tokens expire every 2 hours. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <span></span></p>
-                        <p>Tokens expire every 2 hours. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <span></span></p>
-                        <p>Tokens expire every 2 hours. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <span></span></p>
-                        <p>Tokens expire every 2 hours. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <span></span></p>
-                        <p>Tokens expire every 2 hours. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <span></span></p>
-                        <p>Tokens expire every 2 hours. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <span></span></p>
-                        <p>Tokens expire every 2 hours. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <span></span></p>
-                        <p>Tokens expire every 2 hours. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <span></span></p>
-                        <p>Tokens expire every 2 hours. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <span></span></p>
-                        <p>Tokens expire every 2 hours. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <span></span></p>
+                            <p>All responses are returned in JSON format with a <code>meta</code> and <code>results</code> key. The <code>meta</code> key will contain meta data about pagination including the page, results per page, total number of pages, and total number of records. The <code>results</code> key will contain the requested records.</p>
+                            <p class="mb-4">Here is an example response to the following endpoint:</p>
+                            <code>https://olympicapi.herokuapp.com/countries?page=2&per_page=5</code>
+
+                            <div class="code-block mt-4">
+                            <pre class="light-example-block"><code>{
+                                                &emsp;&emsp;meta: {
+                                                        &emsp;&emsp;&emsp;&emsp;pagination: {
+                                                                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;page: 2,
+                                                                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;per_page: 5,
+                                                                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;total_objects: 218,
+                                                                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;total_pages: 44
+                                                        &emsp;&emsp;&emsp;&emsp;}
+                                                &emsp;&emsp;},
+                                                &emsp;&emsp;results: {
+                                                        &emsp;&emsp;&emsp;&emsp;6: {country_id: 6, country_name: "Algeria", olympics_hosted:{...}},
+                                                        &emsp;&emsp;&emsp;&emsp;7: {country_id: 7, country_name: "American Samoa", olympics_hosted:{...}},
+                                                        &emsp;&emsp;&emsp;&emsp;8: {country_id: 8, country_name: "Andorra", olympics_hosted:{...}},
+                                                        &emsp;&emsp;&emsp;&emsp;9: {country_id: 9, country_name: "Angola", olympics_hosted:{...}},
+                                                        &emsp;&emsp;&emsp;&emsp;10: {country_id: 10, country_name: "Antigua and Barbuda", olympics_hosted:{...}}
+                                                &emsp;&emsp;}
+                                        }</code></pre>
+                            </div>
+                        </div>
+
+                        <div id="endpoints">
+                            <h3 class="mt-4">Endpoints</h3>
+                            <p>Data is accessible through the following endpoints at the root url below.</p>
+                            <table class="table endpoints-table">
+                                <thead>
+                                    <tr>
+                                        <p class="lead">https://olympicapi.herokuapp.com</p>
+                                    <tr>
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>Endpoint</th>
+                                        <th>Parameter</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="lead">Sports</td>
+                                        <td><code>/sports</code></td>
+                                        <td></td>
+                                        <td>Gets all sports.</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-top:none"></td>
+                                        <td><code>/sports/id</code></td>
+                                        <td><code>id</code>as integer</td>
+                                        <td>Gets a single sport.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="lead">Disciplines</td>
+                                        <td><code>/disciplines</code></td>
+                                        <td></td>
+                                        <td>Get all disciplines.</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-top:none"></td>
+                                        <td><code>/disciplines/id</code></td>
+                                        <td><code>id</code> as integer</td>
+                                        <td>Get a single discipline.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="lead">Events</td>
+                                        <td><code>/events</code></td>
+                                        <td></td>
+                                        <td>Get all events</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-top:none"></td>
+                                        <td><code>/events/id</code></td>
+                                        <td><code>id</code> as integer</td>
+                                        <td>Get a single event.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="lead">Olympics</td>
+                                        <td><code>/olympics</code></td>
+                                        <td></td>
+                                        <td>Get all olympics.</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-top:none"></td>
+                                        <td><code>/olympics/id</code></td>
+                                        <td><code>id</code> as integer</td>
+                                        <td>Get a single olympics.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="lead">Countries</td>
+                                        <td><code>/countries</code></td>
+                                        <td></td>
+                                        <td>Get all countries.</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-top:none"></td>
+                                        <td><code>/countries/id</code></td>
+                                        <td><code>id</code> as integer</td>
+                                        <td>Get a single country.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="lead">Athletes</td>
+                                        <td><code>/athletes</code></td>
+                                        <td></td>
+                                        <td>Get all athletes</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-top:none"></td>
+                                        <td><code>/athletes/id</code></td>
+                                        <td><code>id</code> as integer</td>
+                                        <td>Get a single athlete.</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-top:none"></td>
+                                        <td><code>/athletes/id?search=</code></td>
+                                        <td><code>id</code> as integer
+                                        <p><code>search query</code> as string</p></td>
+                                        <td>Get a single athlete.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="lead">Medals</td>
+                                        <td><code>/medals</code></td>
+                                        <td></td>
+                                        <td>Get all medals.</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-top:none"></td>
+                                        <td><code>/medals/id</code></td>
+                                        <td><code>id</code> as integer</td>
+                                        <td>Get a single medal.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </section>
                     
-                    <%= link_to 'Sign Up', sign_up_path %>
                 </div>
             </div>
         </div>
-        <div class="col-4 right-example pt-2">
-            <p class="lead text-white">Example</p>
+        <div class="col-4 container-fluid right-example pt-2">
+            <h3 class="dark-code-headers">Example AJAX Request</h3>
+
+            <div class="code-block-dark">
+                <pre><code><span class="qjquery">$</span>.<span class="qmethod">ajax</span>({
+                    &emsp;&emsp;<span class="qjquery">url</span>:<span class="qstring">"https://olympicapi.herokuapp.com/countries?page=2&per_page=5"</span>,
+                    &emsp;&emsp;<span class="qjquery">headers</span>: {
+                        &emsp;&emsp;&emsp;&emsp;<span class="qstring">'Authorization'</span>:<span class="qstring">'[JSON Web Token]'</span>,
+                        &emsp;&emsp;&emsp;&emsp;<span class="qstring">'Accept'</span>:<span class="qstring">'version=v2'</span>
+                    &emsp;&emsp;} 
+                }).<span class="qmethod">done</span>(<span class="qblue">function</span>(<span class="qjquery">res</span>) {
+                    &emsp;&emsp;<span class="qgreen">console</span>.<span class="qmethod">log</span>(<span class="qjquery">res</span>);
+                }); 
+                </code></pre>
+            </div>
+
+            <h3 class="dark-code-headers mt-4">Example Response</h3>
+            <div class="code-block-dark">
+                <pre><code>{
+                                                &emsp;&emsp;<span class="key">meta</span>: {
+                                                        &emsp;&emsp;&emsp;&emsp;<span class="key">pagination</span>: {
+                                                                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="key">page</span>: <span class="number">2</span>,
+                                                                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="key">per_page</span>: <span class="number">5</span>,
+                                                                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="key">total_objects</span>: <span class="number">218</span>,
+                                                                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="key">total_pages</span>: <span class="number">44</span>
+                                                        &emsp;&emsp;&emsp;&emsp;}
+                                                &emsp;&emsp;},
+                                                &emsp;&emsp;<span class="key">results</span>: {
+                                                        &emsp;&emsp;&emsp;&emsp;<span class="number">6</span>: {<span class="key">country_id</span>: <span class="number">6</span>, <span class="key">country_name</span>: "Algeria", <span class="key">olympics_hosted</span>: {...}},
+                                                        &emsp;&emsp;&emsp;&emsp;<span class="number">7</span>: {<span class="key">country_id</span>: <span class="number">7</span>, <span class="key">country_name</span>: "American Samoa", <span class="key">olympics_hosted</span>: {...}},
+                                                        &emsp;&emsp;&emsp;&emsp;<span class="number">8</span>: {<span class="key">country_id</span>: <span class="number">8</span>, <span class="key">country_name</span>: "Andorra", <span class="key">olympics_hosted</span>: {...}},
+                                                        &emsp;&emsp;&emsp;&emsp;<span class="number">9</span>: {<span class="key">country_id</span>: <span class="number">9</span>, <span class="key">country_name</span>: "Angola", <span class="key">olympics_hosted</span>: {...}},
+                                                        &emsp;&emsp;&emsp;&emsp;<span class="number">10</span>: {<span class="key">country_id</span>: <span class="number">10</span>, <span class="key">country_name</span>: "Antigua and Barbuda", <span class="key">olympics_hosted</span>: {...}}
+                                                &emsp;&emsp;}
+                                        }</code></pre>
+            </div>
+            
         </div>
 </div>
