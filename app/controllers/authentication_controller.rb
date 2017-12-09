@@ -16,7 +16,7 @@ class AuthenticationController < ApplicationController
         command = AuthenticateUser.call(params[:email], params[:password])
 
         if command.success?
-            render json: { auth_token: command.result, expiration_in: 3600 }
+            render json: { auth_token: command.result, expiration_in: 7200 }
         else
             render json: { error: command.errors }, status: :unauthorized
         end

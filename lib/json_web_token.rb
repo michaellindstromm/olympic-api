@@ -13,7 +13,7 @@ class JsonWebToken
         # the 'Authorization' request header. If the JWT matches the server's JWT the request will
         # accepted and the requested data will be sent to the user in JSON format.
 
-        def encode(payload, exp = 1.hours.from_now) 
+        def encode(payload, exp = 2.hours.from_now) 
             payload[:exp] = exp.to_i 
             JWT.encode(payload, Rails.application.secrets.secret_key_base) 
         end 

@@ -14,6 +14,24 @@ class ApplicationController < ActionController::Base
     # 3. authentication_controller where functionality to give first 
     # JWT is defined.
 
+    def add_meta(results, controller) 
+        obj = {
+            pagination: {
+                page: params[:page].to_i,
+                per_page: params[:per_page].to_i ? params[:per_page].to_i : 25, 
+                total_pages: results.total_pages,
+                total_objects: results.total_count 
+            },
+            links: {
+                first: "https://olympicapi.herokuapp.com/api/" + "#{controller}" + "?page=1&per_page=" + "#{params[:per_page]}",
+                last: "https://olympicapi.herokuapp.com/api/" + "#{controller}" + "?page=" +  "#{results.total_pages}" + "&per_page=" + "#{params[:per_page]}",
+                next: ("https://olympicap.herokuapp.com/api/" + "#{controller}" + "?page=" +  "#{params[:page].to_i + 1}" + "&per_page=" + "#{params[:per_page]}" if params[:page].to_i < results.total_pages),
+                prev: ("https://olympicap.herokuapp.com/api/" + "#{controller}" + "?page=" +  "#{params[:page].to_i - 1}" + "&per_page=" + "#{params[:per_page]}" if params[:page].to_i > 1)
+            }
+        }
+        obj
+    end
+
     before_action :authenticate_request
 
     attr_reader :current_user

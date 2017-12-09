@@ -10,7 +10,7 @@ class UsersController < ApplicationController
         user = User.new(user_params)
         if user.save
             command = AuthenticateUser.call(user.email, user.password)
-            render json: { auth_token: command.result, expiration_in: 86400}
+            render json: { auth_token: command.result, expiration_in: 7200}
         else
             redirect_to :sign_up_path
         end

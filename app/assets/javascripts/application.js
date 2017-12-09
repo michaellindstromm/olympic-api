@@ -22,15 +22,26 @@ let listeners = function() {
 
 };
 
+var token = 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo3LCJleHAiOjE1MTI5MzQ2NjF9.Fol2jKRdR1cmRiyITVN28VyY8R3iM9rE_NZY7reHa3w';
+
 $.ajax({
-    url: "/sports",
-    headers: {
-        'Authorization': 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1LCJleHAiOjE1MTI4MzI2NTl9.c_AZx_vsX7KRcovSMdUdnauaT7ogCW5iqBO2ZljinhI',
-        'Accept': 'version=v2'
-    }
-}).done(function () {
-    console.log("Hooray sports!")
+    url: "/api/endpoints",
+}).done(function (res) {
+    makeCall(res);
 });
+
+function makeCall(endpoints) {
+
+    $.ajax({
+        url: '/api/olympics/49?page=4&per_page=15',
+        headers: {
+            'Authorization': token,
+            'Accept': 'version=v2'
+        }
+    }).done(function (res) {
+        console.log(res)
+    });
+};
 
 // $.ajax({
 //     method: 'POST',

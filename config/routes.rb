@@ -31,10 +31,11 @@ OlympicApi::Application.routes.draw do
 
     get 'sign_up', to: 'users#new'
     post 'first_token', to: 'users#create'
+    get 'api/endpoints', to: 'home#show'
   end
 
-  post 'authenticate', to: 'authentication#authenticate'
-  scope module: :api, defaults: { format: :json }, path: '/' do
+  post 'api/authenticate', to: 'authentication#authenticate'
+  scope module: :api, defaults: { format: :json }, path: 'api' do
     scope module: :v1, as: 'v1', path: '/' do
       constraints(ApiConstraints.new({version: 1})) do
         resources :sports, :only => [:index, :show]

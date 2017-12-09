@@ -1,7 +1,7 @@
 <div class="container-fluid">
         <div class="col-2 left-nav pt-2">
             <%= image_tag('Olympic-Rings.png', class: 'olympic-rings')%>
-            <div class="navbar" id="sidebar">
+            <div class="navbar mb-4 pb-3" id="sidebar">
                 <ul class="nav nav-tabs d-flex flex-column align-content-start" role="tablist">
                     <li a class="nav-item"><a class="nav-link active" href="#overview">Overview</a></li>
                     <li a class="nav-item"><a class="nav-link" href="#access">Access</a></li>
@@ -9,6 +9,29 @@
                     <li a class="nav-item"><a class="nav-link" href="#errors">Errors</a></li>
                     <li a class="nav-item dropdown"><a class="nav-link" href="#routes">Routes</a></li>
                 </ul>
+            </div>
+            
+            <h2 class="mt-4 pt-4 text-center hidden">Register</h2>
+            <div class="col-12 mx-auto pt-4 hidden">
+                <%= form_for :user, url: first_token_path, remote: true do |f| %>
+                        
+                        <%= f.text_field  :first_name, required: true, class: "form-control mb-4", placeholder: 'First name' %>
+
+                        
+                        <%= f.text_field  :last_name, required: true, class: "form-control mb-4", placeholder: 'Last name' %>
+
+                        
+                        <%= f.email_field :email, required: true, class: "form-control mb-4", placeholder: 'Email' %>
+
+                        
+                        <%= f.password_field :password, required: true, class: "form-control mb-4", placeholder: 'Password' %>
+
+                        
+                        <%= f.password_field :password_confirmation, required: true, class: "form-control mb-4", placeholder: 'Confirm password' %>
+
+
+                        <%= f.submit 'Get First Token', class: 'btn form-control my-2 btn-primary' %>
+                <% end %>
             </div>
         </div>
         <div class="col-5 center-content pt-2">
@@ -34,7 +57,7 @@
                         <code class="my-4">"Authorization: [WEB TOKEN GOES HERE]"</code>
                         
 
-                        <p class="mt-4"><span style="font-weight:bold">Tokens expire every hour</span>. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <code>/authenticate</code> <a href="#routes">endpoint</a>. Including in the body of your request the email and password used when signing up.</p> 
+                        <p class="mt-4"><span style="font-weight:bold">Tokens expire every 2 hours</span>. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <code>/authenticate</code> <a href="#routes">endpoint</a>. Including in the body of your request the email and password used when signing up.</p> 
                         <p class="font-weight-bold">Note: this request does not require a token.</p>
 
                         <code class="mt-2">"email":"[YOUR EMAIL HERE]"</code>
@@ -46,7 +69,7 @@
                         <code class="my-2 overflow-x">{"auth_token":"[YOUR NEW JSON WEB TOKEN]"}</code>
 
                         <h3 class="my-4">Rate Throttling</h3>
-                        <p>Requests are limited to 10 calls per second per IP Address. If you reach your rate limit you will see this response and will have to wait for your rate limit to reset.</p>
+                        <p>Requests are limited to 10 calls per 10 second period per IP Address. If you reach your rate limit you will see this response and will have to wait for your rate limit to reset.</p>
 
                         <code>Rate limit reached. Please wait until throttle is reset.</code>
                         
@@ -85,8 +108,7 @@
                                 <tr>
                                     <td>GET</td>
                                     <td><code>Missing Token</code></td>
-                                    <td> - The <code>Authorization</code> header is missing or misspelled.
-                                    <p> - Verify there is a space after the colon.</p></td>
+                                    <td> - The <code>Authorization</code> header is missing or misspelled.</td>
                                 </tr>
                                 <tr>
                                     <td>GET</td>
@@ -151,21 +173,21 @@
                             <code>https://olympicapi.herokuapp.com/countries?page=2&per_page=5</code>
 
                             <div class="code-block mt-4">
-                            <pre class="light-example-block"><code>{
-                                                &emsp;&emsp;meta: {
-                                                        &emsp;&emsp;&emsp;&emsp;pagination: {
-                                                                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;page: 2,
-                                                                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;per_page: 5,
-                                                                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;total_objects: 218,
-                                                                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;total_pages: 44
+                            <pre class="light-example-block"><code class="chrome-code">{
+                                                &emsp;&emsp;<span class="chrome-purple">meta</span>: {
+                                                        &emsp;&emsp;&emsp;&emsp;<span class="chrome-purple">pagination</span>: {
+                                                                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="chrome-purple">page</span>: <span class="qblue">2</span>
+                                                                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="chrome-purple">per_page</span>: <span class="qblue">5</span>,
+                                                                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="chrome-purple">total_objects</span>: <span class="qblue">218</span>,
+                                                                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="chrome-purple">total_pages</span>: <span class="qblue">44</span>
                                                         &emsp;&emsp;&emsp;&emsp;}
                                                 &emsp;&emsp;},
-                                                &emsp;&emsp;results: {
-                                                        &emsp;&emsp;&emsp;&emsp;6: {country_id: 6, country_name: "Algeria", olympics_hosted:{...}},
-                                                        &emsp;&emsp;&emsp;&emsp;7: {country_id: 7, country_name: "American Samoa", olympics_hosted:{...}},
-                                                        &emsp;&emsp;&emsp;&emsp;8: {country_id: 8, country_name: "Andorra", olympics_hosted:{...}},
-                                                        &emsp;&emsp;&emsp;&emsp;9: {country_id: 9, country_name: "Angola", olympics_hosted:{...}},
-                                                        &emsp;&emsp;&emsp;&emsp;10: {country_id: 10, country_name: "Antigua and Barbuda", olympics_hosted:{...}}
+                                                &emsp;&emsp;<span class="chrome-purple">results</span>: {
+                                                        &emsp;&emsp;&emsp;&emsp;<span class="chrome-purple">6</span>: {<span class="chrome-purple">country_id</span>: <span class="qblue">6</span>, <span class="chrome-purple">country_name</span>: <span class="code-red">"Algeria"</span>, <span class="chrome-purple">olympics_hosted</span>:{...},
+                                                        &emsp;&emsp;&emsp;&emsp;<span class="chrome-purple">7</span>: {<span class="chrome-purple">country_id</span>: <span class="qblue">7</span>, <span class="chrome-purple">country_name</span>: <span class="code-red">"American Samoa"</span>, <span class="chrome-purple">olympics_hosted</span>:{...},
+                                                        &emsp;&emsp;&emsp;&emsp;<span class="chrome-purple">8</span>: {<span class="chrome-purple">country_id</span>: <span class="qblue">8</span>, <span class="chrome-purple">country_name</span>: <span class="code-red">"Andorra"</span>, <span class="chrome-purple">olympics_hosted</span>:{...},
+                                                        &emsp;&emsp;&emsp;&emsp;<span class="chrome-purple">9</span>: {<span class="chrome-purple">country_id</span>: <span class="qblue">9</span>, <span class="chrome-purple">country_name</span>: <span class="code-red">"Angola"</span>, <span class="chrome-purple">olympics_hosted</span>:{...},
+                                                        &emsp;&emsp;&emsp;&emsp;<span class="chrome-purple">10</span>: {<span class="chrome-purple">country_id</span>: <span class="qblue">10</span> <span class="chrome-purple">country_name</span>: <span class="code-red">"Antigua and Barbuda"</span>, <span class="chrome-purple">olympics_hosted</span>:{...}
                                                 &emsp;&emsp;}
                                         }</code></pre>
                             </div>
@@ -173,7 +195,23 @@
 
                         <div id="endpoints">
                             <h3 class="mt-4">Endpoints</h3>
-                            <p>Data is accessible through the following endpoints at the root url below.</p>
+                            <p>Data is accessible through the following endpoints. To recieve the endpoints simply make a request to:</p>
+                            <code class="my-4">https://olympicapi.herokuapp.com/api/endpoints</code>
+                            <p class="mt-4">This will return the following JSON object.</p>
+
+                            <div class="code-block mt-4">
+                            <pre class="light-example-block"><code class="chrome-code">{
+                                    &emsp;&emsp;<span class="chrome-purple">sports</span>: <span class="code-red">'https://olympicapi.herokuapp.com/api/sports'</span>,
+                                    &emsp;&emsp;<span class="chrome-purple">disciplines</span>: <span class="code-red">'https://olympicapi.herokuapp.com/api/disciplines'</span>,        
+                                    &emsp;&emsp;<span class="chrome-purple">events</span>: <span class="code-red">'https://olympicapi.herokuapp.com/api/events'</span>,        
+                                    &emsp;&emsp;<span class="chrome-purple">olympics</span>: <span class="code-red">'https://olympicapi.herokuapp.com/api/olympics'</span>,        
+                                    &emsp;&emsp;<span class="chrome-purple">countries</span>: <span class="code-red">'https://olympicapi.herokuapp.com/api/countries'</span>,        
+                                    &emsp;&emsp;<span class="chrome-purple">athletes</span>: <span class="code-red">'https://olympicapi.herokuapp.com/api/athletes'</span>,        
+                                    &emsp;&emsp;<span class="chrome-purple">medals</span>: <span class="code-red">'https://olympicapi.herokuapp.com/api/medals'</span>,
+                                    &emsp;&emsp;<span class="chrome-purple">token</span>: <span class="code-red">'https://olympicapi.herokuapp.com/api/authenticate'</span>        
+                                }</code></pre>
+                            </div>
+
                             <p class="lead">https://olympicapi.herokuapp.com</p>
                             <h4 class="mt-4">POST</h4>
                             <table class="table endpoints-table">
@@ -188,7 +226,7 @@
                                 <tbody>
                                     <tr>
                                         <td class="lead">Authentication</td>
-                                        <td><code>/authenticate</code></td>
+                                        <td><code>.token</code></td>
                                         <td> <code>email</code> as string
                                         <p> <code>password</code> as string </p> </td>
                                         <td>Get new JSON Web Token.</td>
@@ -208,92 +246,92 @@
                                 <tbody>
                                     <tr>
                                         <td class="lead">Sports</td>
-                                        <td><code>/sports</code></td>
+                                        <td><code>.sports</code></td>
                                         <td></td>
                                         <td>Gets all sports.</td>
                                     </tr>
                                     <tr>
                                         <td style="border-top:none"></td>
-                                        <td><code>/sports/id</code></td>
+                                        <td><code>.sports + '/id'</code></td>
                                         <td><code>id</code>as integer</td>
                                         <td>Gets a single sport.</td>
                                     </tr>
                                     <tr>
                                         <td class="lead">Disciplines</td>
-                                        <td><code>/disciplines</code></td>
+                                        <td><code>.disciplines</code></td>
                                         <td></td>
                                         <td>Get all disciplines.</td>
                                     </tr>
                                     <tr>
                                         <td style="border-top:none"></td>
-                                        <td><code>/disciplines/id</code></td>
+                                        <td><code>.disciplines + '/id'</code></td>
                                         <td><code>id</code> as integer</td>
                                         <td>Get a single discipline.</td>
                                     </tr>
                                     <tr>
                                         <td class="lead">Events</td>
-                                        <td><code>/events</code></td>
+                                        <td><code>.events</code></td>
                                         <td></td>
                                         <td>Get all events</td>
                                     </tr>
                                     <tr>
                                         <td style="border-top:none"></td>
-                                        <td><code>/events/id</code></td>
+                                        <td><code>.events + '/id'</code></td>
                                         <td><code>id</code> as integer</td>
                                         <td>Get a single event.</td>
                                     </tr>
                                     <tr>
                                         <td class="lead">Olympics</td>
-                                        <td><code>/olympics</code></td>
+                                        <td><code>.olympics</code></td>
                                         <td></td>
                                         <td>Get all olympics.</td>
                                     </tr>
                                     <tr>
                                         <td style="border-top:none"></td>
-                                        <td><code>/olympics/id</code></td>
+                                        <td><code>.olympics + '/id'</code></td>
                                         <td><code>id</code> as integer</td>
                                         <td>Get a single olympics.</td>
                                     </tr>
                                     <tr>
                                         <td class="lead">Countries</td>
-                                        <td><code>/countries</code></td>
+                                        <td><code>.countries</code></td>
                                         <td></td>
                                         <td>Get all countries.</td>
                                     </tr>
                                     <tr>
                                         <td style="border-top:none"></td>
-                                        <td><code>/countries/id</code></td>
+                                        <td><code>.countries + '/id'</code></td>
                                         <td><code>id</code> as integer</td>
                                         <td>Get a single country.</td>
                                     </tr>
                                     <tr>
                                         <td class="lead">Athletes</td>
-                                        <td><code>/athletes</code></td>
+                                        <td><code>.athletes</code></td>
                                         <td></td>
                                         <td>Get all athletes</td>
                                     </tr>
                                     <tr>
                                         <td style="border-top:none"></td>
-                                        <td><code>/athletes/id</code></td>
+                                        <td><code>.athletes + '/id'</code></td>
                                         <td><code>id</code> as integer</td>
                                         <td>Get a single athlete.</td>
                                     </tr>
                                     <tr>
                                         <td style="border-top:none"></td>
-                                        <td><code>/athletes/id?search=</code></td>
+                                        <td><code>.athletes + '/id?search='</code></td>
                                         <td><code>id</code> as integer
                                         <p><code>search query</code> as string</p></td>
                                         <td>Get a single athlete.</td>
                                     </tr>
                                     <tr>
                                         <td class="lead">Medals</td>
-                                        <td><code>/medals</code></td>
+                                        <td><code>.medals</code></td>
                                         <td></td>
                                         <td>Get all medals.</td>
                                     </tr>
                                     <tr>
                                         <td style="border-top:none"></td>
-                                        <td><code>/medals/id</code></td>
+                                        <td><code>.medals + '/id'</code></td>
                                         <td><code>id</code> as integer</td>
                                         <td>Get a single medal.</td>
                                     </tr>

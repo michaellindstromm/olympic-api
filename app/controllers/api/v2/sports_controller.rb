@@ -4,18 +4,11 @@ module Api::V2
 
         def index
             sports = Sport.all.page(params[:page]).per(params[:per_page])
-
-            render json: build_sports(sports), meta: { pagination:
-                                       { page: params[:page].to_i,
-                                         per_page: params[:per_page].to_i ? params[:per_page] : 25, 
-                                         total_pages: sports.total_pages,
-                                         total_objects: sports.total_count } }
-
+            render json: build_sports(sports)
         end
 
         def show
             sport = Sport.find(params[:id])
-
             render json: build_sport(sport)
         end
 
@@ -26,33 +19,28 @@ module Api::V2
 
             def build_sports(sports) 
                 obj = {}
-                obj[:meta] = {
-                    "pagination": {
-                        "page": params[:page].to_i,
-                        "per_page": params[:per_page].to_i ? params[:per_page] : 25, 
-                        "total_pages": sports.total_pages,
-                        "total_objects": sports.total_count 
-                    }
-                }
+                obj[:meta] = add_meta(sports, 'sports')
+                obj[:results] = []
 
-                obj["results"] = {}
                 sports.each do |s|
-
-                    disciplines = {}
+                    disciplines = []
 
                     s.disciplines.each do |d|
-                        disciplines[d.id] = {
+                        discipline_data = {
                             discipline_id: d.id,
                             discipline_name: d.discipline_name
                         }
+                        disciplines << discipline_data
                     end
 
-                    obj["results"][s.id] = {
+                    sports_data = {
                         sport_id: s.id,
                         sport_name: s.sport_name,
                         disciplines: disciplines
-                    }
+                    }  
+                    obj[:results] << sports_data
                 end
+
                 obj
             end
 
@@ -74,6 +62,7 @@ module Api::V2
                 }
 
                 obj
+
             end
     end
 end
