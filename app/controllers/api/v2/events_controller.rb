@@ -21,7 +21,7 @@ class Api::V2::EventsController < ApplicationController
             obj = {}
             obj[:results] = {}
             obj[:results][e.id] = {
-                e.event_name
+                event_name: e.event_name
             }
             obj
         end
