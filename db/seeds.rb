@@ -64,282 +64,284 @@ summer_data = root_path + 'SUMMERMEDALS.csv'
 winter_data = root_path + 'WINTERMEDALS.csv'
 
 
-# POPULATE SPORTS TABLE
-csv_text = File.read(summer_data)
-csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+# # POPULATE SPORTS TABLE
+# csv_text = File.read(summer_data)
+# csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 
-csv.each do |row|
-    sport = row['Sport']
-    discipline = row['Discipline']
-    event = row ['Event']
-    if Sport.exists?(:sport_name => sport)
-    else
-        s = Sport.new
-        s.sport_name = row['Sport']
-        s.save
-    end
+# csv.each do |row|
+#     sport = row['Sport']
+#     discipline = row['Discipline']
+#     event = row ['Event']
+#     if Sport.exists?(:sport_name => sport)
+#     else
+#         s = Sport.new
+#         s.sport_name = row['Sport']
+#         s.save
+#     end
 
-end
+# end
 
-csv_text = File.read(winter_data)
-csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+# csv_text = File.read(winter_data)
+# csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 
-csv.each do |row|
-    sport = row['Sport']
-    if Sport.exists?(:sport_name => sport)
-    else
-        s = Sport.new
-        s.sport_name = row['Sport']
-        s.save
-    end
-end
+# csv.each do |row|
+#     sport = row['Sport']
+#     if Sport.exists?(:sport_name => sport)
+#     else
+#         s = Sport.new
+#         s.sport_name = row['Sport']
+#         s.save
+#     end
+# end
 
 
-# POPULATE DISCIPLINES TABLE
-csv_text = File.read(summer_data)
-csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+# # POPULATE DISCIPLINES TABLE
+# csv_text = File.read(summer_data)
+# csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 
-csv.each do |row|
+# csv.each do |row|
 
-    sport = row['Sport']
-    discipline = row['Discipline']
-    event = row ['Event']
+#     sport = row['Sport']
+#     discipline = row['Discipline']
+#     event = row ['Event']
 
-    if Sport.find_by(sport_name: sport).disciplines.exists?(discipline_name: discipline)
-    else
-        s = Sport.find_by(sport_name: sport).id
-        d = Discipline.new
-        d.discipline_name = discipline
-        d.sport_id = s
-        d.save
-    end
+#     if Sport.find_by(sport_name: sport).disciplines.exists?(discipline_name: discipline)
+#     else
+#         s = Sport.find_by(sport_name: sport).id
+#         d = Discipline.new
+#         d.discipline_name = discipline
+#         d.sport_id = s
+#         d.save
+#     end
     
 
-end
+# end
 
-csv_text = File.read(winter_data)
-csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+# csv_text = File.read(winter_data)
+# csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 
-csv.each do |row|
+# csv.each do |row|
 
-    sport = row['Sport']
-    discipline = row['Discipline']
-    event = row ['Event']
+#     sport = row['Sport']
+#     discipline = row['Discipline']
+#     event = row ['Event']
 
-    if Sport.find_by(sport_name: sport).disciplines.exists?(discipline_name: discipline)
-    else
-        s = Sport.find_by(sport_name: sport).id
-        d = Discipline.new
-        d.discipline_name = discipline
-        d.sport_id = s
-        d.save
-    end
+#     if Sport.find_by(sport_name: sport).disciplines.exists?(discipline_name: discipline)
+#     else
+#         s = Sport.find_by(sport_name: sport).id
+#         d = Discipline.new
+#         d.discipline_name = discipline
+#         d.sport_id = s
+#         d.save
+#     end
 
-end
+# end
 
 
-# POPULATE EVENTS TABLE
-csv_text = File.read(summer_data)
-csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
-count = 0
-csv.each do |row|
+# # POPULATE EVENTS TABLE
+# csv_text = File.read(summer_data)
+# csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+# count = 0
+# csv.each do |row|
 
-    sport = row['Sport']
-    discipline = row['Discipline']
-    event = row['Event']
-    gender = row['Gender']
+#     sport = row['Sport']
+#     discipline = row['Discipline']
+#     event = row['Event']
+#     gender = row['Gender']
 
-    if Discipline.find_by(discipline_name: discipline).events.exists?(event_name: event, gender: gender)
-    else
-        e = Event.new
-        e.event_name = event
-        e.discipline_id = Discipline.find_by(discipline_name: discipline).id
-        e.gender = gender
-        e.save
-    end
+#     if Discipline.find_by(discipline_name: discipline).events.exists?(event_name: event, gender: gender)
+#     else
+#         e = Event.new
+#         e.event_name = event
+#         e.discipline_id = Discipline.find_by(discipline_name: discipline).id
+#         e.gender = gender
+#         e.save
+#     end
     
 
-end
+# end
 
-csv_text = File.read(winter_data)
-csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+# csv_text = File.read(winter_data)
+# csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 
-csv.each do |row|
+# csv.each do |row|
 
-    sport = row['Sport']
-    discipline = row['Discipline']
-    event = row['Event']
-    gender = row['Gender']
+#     sport = row['Sport']
+#     discipline = row['Discipline']
+#     event = row['Event']
+#     gender = row['Gender']
 
-    if Discipline.find_by(discipline_name: discipline).events.exists?(event_name: event, gender: gender)
-    else
-        e = Event.new
-        e.event_name = event
-        e.discipline_id = Discipline.find_by(discipline_name: discipline).id
-        e.gender = row['Gender']
-        e.save
-    end
+#     if Discipline.find_by(discipline_name: discipline).events.exists?(event_name: event, gender: gender)
+#     else
+#         e = Event.new
+#         e.event_name = event
+#         e.discipline_id = Discipline.find_by(discipline_name: discipline).id
+#         e.gender = row['Gender']
+#         e.save
+#     end
 
-end
-
-
-
-# POPULATE COUNTRIES TABLE
-csv_text = File.read(country_data)
-csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
-
-csv.each do |row|
-    country = row['Country']
-    if country.include?("*")
-        country.delete!("*")
-    end
-    c = Country.new
-    c.country_name = country
-    c.noc = row['Int Olympic Committee code']
-    c.save
-end
+# end
 
 
-# POPULATE CITIES
-cities_txt = File.read(city_data);
-cities_txt.split(/\n/).each_with_index do |line, i|
-    if i != 0
-        row = line.split(":")
-        c = City.new
-        c.city_name = row[0]
-        c.country_id = Country.find_by(noc: row[1]).id
-        c.save
-    end
-end
+
+# # POPULATE COUNTRIES TABLE
+# csv_text = File.read(country_data)
+# csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+
+# csv.each do |row|
+#     country = row['Country']
+#     if country.include?("*")
+#         country.delete!("*")
+#     end
+#     c = Country.new
+#     c.country_name = country
+#     c.noc = row['Int Olympic Committee code']
+#     c.save
+# end
 
 
-# POPULATE OLYMPICS TABLE
-csv_text = File.read(summer_data)
-csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
-
-olympics_summer_dict = Hash.new
-
-csv.each do |row|
-
-    if olympics_summer_dict[row['Year']]
-    else
-        olympics_summer_dict[row['Year']] = 1
-        o = Olympic.new
-        o.year = row['Year'].to_i
-        o.season = 'Summer'
-        o.city_id = City.find_by(city_name: row['City']).id
-        o.save
-    end
-
-end
-
-csv_text = File.read(winter_data)
-csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
-
-olympics_winter_dict = Hash.new
-
-csv.each do |row|
-
-    if olympics_winter_dict[row['Year']]
-    else
-        olympics_winter_dict[row['Year']] = 1
-        o = Olympic.new
-        o.year = row['Year'].to_i
-        o.season = 'Winter'
-        o.city_id = City.find_by(city_name: row['City']).id
-        o.save
-    end
-
-end
+# # POPULATE CITIES
+# cities_txt = File.read(city_data);
+# cities_txt.split(/\n/).each_with_index do |line, i|
+#     if i != 0
+#         row = line.split(":")
+#         c = City.new
+#         c.city_name = row[0]
+#         c.country_id = Country.find_by(noc: row[1]).id
+#         c.save
+#     end
+# end
 
 
-# POPULATE ATHLETES TABLE
-csv_text = File.read(summer_data)
-csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+# # POPULATE OLYMPICS TABLE
+# csv_text = File.read(summer_data)
+# csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 
-athlete_dict = Hash.new
+# olympics_summer_dict = Hash.new
 
-csv.each do |row|
+# csv.each do |row|
 
-    first_name = '-'
-    last_name = '-'
-    gender = '-'
+#     if olympics_summer_dict[row['Year']]
+#     else
+#         olympics_summer_dict[row['Year']] = 1
+#         o = Olympic.new
+#         o.year = row['Year'].to_i
+#         o.season = 'Summer'
+#         o.city_id = City.find_by(city_name: row['City']).id
+#         o.save
+#     end
 
-    if row['Athlete'].class != NilClass
-        name = row['Athlete'].split(", ")
-        if name[1].class == NilClass
-            first_name = '-'
-        else
-            first_name = name[1]
-        end
-        last_name = name[0]
-        gender = row['Gender']
-    else 
-        first_name = '-'
-        last_name = '-'
-        gender = row['Gender']
-    end
+# end
 
-    key = first_name + last_name + gender 
+# csv_text = File.read(winter_data)
+# csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 
-    if athlete_dict[key]
+# olympics_winter_dict = Hash.new
+
+# csv.each do |row|
+
+#     if olympics_winter_dict[row['Year']]
+#     else
+#         olympics_winter_dict[row['Year']] = 1
+#         o = Olympic.new
+#         o.year = row['Year'].to_i
+#         o.season = 'Winter'
+#         o.city_id = City.find_by(city_name: row['City']).id
+#         o.save
+#     end
+
+# end
+
+
+# # POPULATE ATHLETES TABLE
+# csv_text = File.read(summer_data)
+# csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+
+# athlete_dict = Hash.new
+
+# csv.each do |row|
+
+#     first_name = '-'
+#     last_name = '-'
+#     gender = '-'
+
+#     if row['Athlete'].class != NilClass
+#         name = row['Athlete'].split(", ")
+#         if name[1].class == NilClass
+#             first_name = '-'
+#         else
+#             first_name = name[1]
+#         end
+#         last_name = name[0]
+#         gender = row['Gender']
+#     else 
+#         first_name = '-'
+#         last_name = '-'
+#         gender = row['Gender']
+#     end
+
+#     key = first_name + last_name + gender 
+
+#     if athlete_dict[key]
     
-    else
-        athlete_dict[key] = 1
-        ath = Athlete.new
-        ath.first_name = first_name
-        ath.last_name = last_name
-        ath.gender = gender
-        ath.save
-    end
+#     else
+#         athlete_dict[key] = 1
+#         ath = Athlete.new
+#         ath.first_name = first_name
+#         ath.last_name = last_name
+#         ath.gender = gender
+#         ath.save
+#     end
 
-end
+# end
 
-csv_text = File.read(winter_data)
-csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+# csv_text = File.read(winter_data)
+# csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 
-csv.each do |row|
+# csv.each do |row|
 
-    first_name = '-'
-    last_name = '-'
-    gender = '-'
+#     first_name = '-'
+#     last_name = '-'
+#     gender = '-'
 
-    if row['Athlete'].class != NilClass
-        name = row['Athlete'].split(", ")
-        if name[1].class == NilClass
-            first_name = '-'
-        else
-            first_name = name[1]
-        end
-        last_name = name[0]
-        gender = row['Gender']
-    else 
-        first_name = '-'
-        last_name = '-'
-        gender = row['Gender']
-    end
+#     if row['Athlete'].class != NilClass
+#         name = row['Athlete'].split(", ")
+#         if name[1].class == NilClass
+#             first_name = '-'
+#         else
+#             first_name = name[1]
+#         end
+#         last_name = name[0]
+#         gender = row['Gender']
+#     else 
+#         first_name = '-'
+#         last_name = '-'
+#         gender = row['Gender']
+#     end
 
-    key = first_name + last_name + gender 
+#     key = first_name + last_name + gender 
 
-    if athlete_dict[key]
+#     if athlete_dict[key]
     
-    else
-        athlete_dict[key] = 1
-        ath = Athlete.new
-        ath.first_name = first_name
-        ath.last_name = last_name
-        ath.gender = gender
-        ath.save
-    end
+#     else
+#         athlete_dict[key] = 1
+#         ath = Athlete.new
+#         ath.first_name = first_name
+#         ath.last_name = last_name
+#         ath.gender = gender
+#         ath.save
+#     end
 
-end
+# end
 
 
 # POPULATE MEDALS TABLE
 csv_text = File.read(summer_data)
 csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 
-csv.each do |row|
+csv.each_with_index do |row, i|
+
+    if i > 15415
 
     sport = row['Sport']
     discipline = row['Discipline']
@@ -369,6 +371,8 @@ csv.each do |row|
     m.olympic_id = Olympic.find_by(year: year, season: 'Summer').id
     m.country_id = Country.find_by(noc: noc).id
     m.save
+    end
+    
 
 end
 
