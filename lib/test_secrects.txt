@@ -6,6 +6,6 @@ password: 123123123
 
 Development
 
-Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1MTI4NzI1MTh9.i8iHd7Duc3ApEUOEZ4Raj20b_QdOg1DQrF-lG6F0KcE
+Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1MTI4ODIyNDF9.hbeAqWimtVE6JoAdYnH6a7TRu1qOZUUABQCjOZy_lPg
 email: a@a.com
 password: 123123123

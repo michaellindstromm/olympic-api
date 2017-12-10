@@ -1,6 +1,6 @@
 .left-nav {
     position: fixed;
-    max-width: 20%;
+    max-width: 12%;
     top: 0;
     left: 0;
     height: 100%;
@@ -13,7 +13,7 @@
 
 .right-example {
     position: fixed;
-    max-width: 38%;
+    max-width: 45%;
     top: 0;
     right: 0;
     height: 100%;
@@ -25,7 +25,7 @@
 .center-content {
     // border-left: 1px solid rgba(0, 0, 0, 0.1);
     position: absolute;
-    left: 20%;
+    left: 12%;
     top: 0;
 }
 
@@ -200,3 +200,46 @@ pre.light-example-block {
 .code-red-background {
     background-color: $code-red;
 }
+
+.dark-line-divider {
+    border-bottom: 1px solid $dark-code-font;
+    width: 100%;
+}
+
+.full-url {
+    color: $dark-code-font;
+}
+
+.http-method {
+    border-radius: 3px;
+    border: 1px solid $dark-code-font;
+    padding: 0.25rem;
+    font-weight: bold;
+}
+
+.root-url {
+    color: $dark-code-light-font;
+    font-size: 1.1rem;
+}
+
+.dark-dropdowns {
+    background: $dark-code-dropdown;
+}
+
+.dropdown-item {
+    color: $dark-code-font;
+}
+
+.dark-url-div {
+    background-color: $dark-code-block;
+    width: 100%;
+    // border-top: 1px solid $dark-divider;
+    // border-bottom: $dark-divider;
+    box-shadow: 0 4px 10px black inset;
+}
+
+.dark-dropdowns-button {
+    width: 115px !important;
+}
+
+
