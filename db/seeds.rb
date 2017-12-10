@@ -407,5 +407,6 @@ csv.each do |row|
     m.olympic_id = Olympic.find_by(year: year, season: 'Winter').id
     m.country_id = Country.find_by(noc: noc).id
     m.save
-
+    
+    
 end
