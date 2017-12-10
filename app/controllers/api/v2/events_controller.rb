@@ -20,7 +20,7 @@ class Api::V2::EventsController < ApplicationController
         def build_event(e)
             obj = {}
             obj[:results] = {}
-            obj[:results][e.id] {
+            obj[:results][e.id] = {
                 e.event_name
             }
             obj
