@@ -3,11 +3,7 @@ class Api::V2::CountriesController < ApplicationController
     def index
         countries = Country.all.page(params[:page]).per(params[:per_page])
 
-        render json: build_countries(countries), meta: { pagination:
-                                       { page: params[:page].to_i ? params[:page] : countries.page,
-                                         per_page: params[:per_page].to_i ? params[:per_page] : 25, 
-                                         total_pages: countries.total_pages,
-                                         total_objects: countries.total_count } }
+        render json: build_countries(countries)
     end
 
     def show
@@ -24,62 +20,63 @@ class Api::V2::CountriesController < ApplicationController
         def build_countries(countries)
             obj = {}
 
-            obj[:meta] = {
-                    "pagination": {
-                        "page": params[:page].to_i,
-                        "per_page": params[:per_page].to_i ? params[:per_page] : 25, 
-                        "total_pages": countries.total_pages,
-                        "total_objects": countries.total_count 
-                    }
-                }
+            obj[:meta] = add_meta(countries, 'countries')
 
-            obj["results"] = {}
+            obj[:results] = []
 
             countries.each do |c|
 
-                olympics = {}
+                olympics = []
 
                 c.olympics.each do |o|
-                    olympics[o.id] = {
-                        "olympic_id": o.id,
-                        "year": o.year,
-                        "season": o.season,
-                        "city": o.city.city_name
+                    olympic_data = {
+                        olympic_id: o.id,
+                        year: o.year,
+                        season: o.season,
+                        city: o.city.city_name
                     }
+
+                    olympics << olympic_data
                 end
 
-                obj["results"][c.id] = {
-                    "country_id": c.id,
-                    "country_name": c.country_name,
-                    "olympics_hosted": olympics
+                country_data = {
+                    country_id: c.id,
+                    country_name: c.country_name,
+                    IOC_code: c.noc,
+                    olympics_hosted: olympics
                 }
+                
+                obj[:results] << country_data
             end
 
             obj
 
         end
 
-        def build_country(country)
+        def build_country(c)
 
             obj = {}
 
-            olympics = {}
+            olympics = []
 
-            country.olympics.each do |o|
-                olympics[o.id] = {
-                    "olympic_id": o.id,
-                    "year": o.year,
-                    "season": o.season,
-                    "city": o.city.city_name
+            c.olympics.each do |o|
+                olympic_data = {
+                    olympic_id: o.id,
+                    year: o.year,
+                    season: o.season,
+                    city: o.city.city_name
                 } 
+
+                olympics << olympic_data
             end
 
-            obj["results"] = {}
+            obj[:results] = {}
 
-            obj["results"][country.id] = {
-                "country_id": country.id,
-                "country_name": country.country_name,
-                "olympics_hosted": olympics
+            obj[:results][c.id] = {
+                country_id: c.id,
+                country_name: c.country_name,
+                IOC_code: c.noc,
+                olympics_hosted: olympics
             }
 
         end

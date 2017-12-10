@@ -6,4 +6,5 @@ class Olympic < ApplicationRecord
     has_many :medals
     has_many :events, through: :medals
 
+    has_many :athletes, through: :medals
 end

@@ -48,6 +48,10 @@ OlympicApi::Application.routes.draw do
         resources :sports, :only => [:index, :show]
         resources :olympics, :only => [:index, :show]
         resources :countries, :only => [:index, :show]
+        resources :medals, :only => [:index, :show]
+        resources :events, :only => [:index, :show]
+        resources :disciplines, :only => [:index, :show]
+        resources :athletes, :only => [:index, :show]
       end
     end
   end

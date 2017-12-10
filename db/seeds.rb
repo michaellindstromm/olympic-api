@@ -366,7 +366,7 @@ csv.each do |row|
     m.rank = row['Medal']
     m.event_id = Event.joins(:discipline).find_by('disciplines.discipline_name': discipline, 'events.event_name': event).id
     m.athlete_id = Athlete.find_by(first_name: first_name, last_name: last_name, gender: gender).id
-    m.olympic_id = Olympic.find_by(year: year).id
+    m.olympic_id = Olympic.find_by(year: year, season: 'Summer').id
     m.country_id = Country.find_by(noc: noc).id
     m.save
 
@@ -404,7 +404,7 @@ csv.each do |row|
     m.rank = row['Medal']
     m.event_id = Event.joins(:discipline).find_by('disciplines.discipline_name': discipline, 'events.event_name': event).id
     m.athlete_id = Athlete.find_by(first_name: first_name, last_name: last_name, gender: gender).id
-    m.olympic_id = Olympic.find_by(year: year).id
+    m.olympic_id = Olympic.find_by(year: year, season: 'Winter').id
     m.country_id = Country.find_by(noc: noc).id
     m.save
 
