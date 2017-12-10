@@ -113,7 +113,7 @@ csv.each do |row|
         d.sport_id = s
         d.save
     end
-        
+    
 
 end
 
@@ -157,7 +157,7 @@ csv.each do |row|
         e.gender = gender
         e.save
     end
-        
+    
 
 end
 
@@ -264,7 +264,7 @@ csv.each do |row|
     first_name = '-'
     last_name = '-'
     gender = '-'
-    
+
     if row['Athlete'].class != NilClass
         name = row['Athlete'].split(", ")
         if name[1].class == NilClass
@@ -279,11 +279,11 @@ csv.each do |row|
         last_name = '-'
         gender = row['Gender']
     end
-    
+
     key = first_name + last_name + gender 
-    
+
     if athlete_dict[key]
-        
+    
     else
         athlete_dict[key] = 1
         ath = Athlete.new
@@ -303,7 +303,7 @@ csv.each do |row|
     first_name = '-'
     last_name = '-'
     gender = '-'
-    
+
     if row['Athlete'].class != NilClass
         name = row['Athlete'].split(", ")
         if name[1].class == NilClass
@@ -318,11 +318,11 @@ csv.each do |row|
         last_name = '-'
         gender = row['Gender']
     end
-    
+
     key = first_name + last_name + gender 
-    
+
     if athlete_dict[key]
-        
+    
     else
         athlete_dict[key] = 1
         ath = Athlete.new
@@ -336,7 +336,6 @@ end
 
 
 # POPULATE MEDALS TABLE
-count = 0
 csv_text = File.read(summer_data)
 csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 
@@ -365,7 +364,7 @@ csv.each do |row|
 
     m = Medal.new
     m.rank = row['Medal']
-    m.event_id = Event.find_by(event_name: event).id
+    m.event_id = Event.joins(:discipline).find_by('disciplines.discipline_name': discipline, 'events.event_name': event).id
     m.athlete_id = Athlete.find_by(first_name: first_name, last_name: last_name, gender: gender).id
     m.olympic_id = Olympic.find_by(year: year).id
     m.country_id = Country.find_by(noc: noc).id
@@ -400,9 +399,10 @@ csv.each do |row|
 
     end
 
+    
     m = Medal.new
     m.rank = row['Medal']
-    m.event_id = Event.find_by(event_name: event).id
+    m.event_id = Event.joins(:discipline).find_by('disciplines.discipline_name': discipline, 'events.event_name': event).id
     m.athlete_id = Athlete.find_by(first_name: first_name, last_name: last_name, gender: gender).id
     m.olympic_id = Olympic.find_by(year: year).id
     m.country_id = Country.find_by(noc: noc).id

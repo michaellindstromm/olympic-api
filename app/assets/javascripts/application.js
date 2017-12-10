@@ -22,7 +22,7 @@ let listeners = function() {
 
 };
 
-var token = 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo3LCJleHAiOjE1MTI5MzQ2NjF9.Fol2jKRdR1cmRiyITVN28VyY8R3iM9rE_NZY7reHa3w';
+var token = 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1MTI4NzI1MTh9.i8iHd7Duc3ApEUOEZ4Raj20b_QdOg1DQrF-lG6F0KcE';
 
 $.ajax({
     url: "/api/endpoints",
