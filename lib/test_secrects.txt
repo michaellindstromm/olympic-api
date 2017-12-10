@@ -1,6 +1,6 @@
 Production
 
-Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1MTI2MzAyMzB9.4mDxarRd1V4KyYQN0pyxbIxVIe6rqM-qkZgcyGCB8sI
+Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1MTI4ODAyNjN9.b27eif-hGhCEVo77AzfDA1v37f4A39u8O9TuItZTY58
 email: mike@jones.com
 password: 123123123
 
