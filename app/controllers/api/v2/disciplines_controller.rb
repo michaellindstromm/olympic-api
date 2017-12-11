@@ -56,7 +56,7 @@ module Api::V2
 
                 events = []
 
-                d.events.each do |e|
+                d.events.order(:event_name).each do |e|
                     event_data = {
                         event_id: e.id,
                         event_name: e.event_name,

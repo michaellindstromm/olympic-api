@@ -24,7 +24,7 @@ class Api::V2::OlympicsController < ApplicationController
 
                 events = []
 
-                o.events.group(:id).each do |e|
+                o.events.group(:id).order(:event_name).each do |e|
                     event_data = {
                         event_id: e.id,
                         event_name: e.event_name,
@@ -54,7 +54,7 @@ class Api::V2::OlympicsController < ApplicationController
 
             events = []
 
-            o.events.group(:id).each do |e|
+            o.events.group(:id).order(:event_name).each do |e|
                 event_data = {
                     event_id: e.id,
                     event_name: e.event_name,

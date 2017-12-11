@@ -25,7 +25,7 @@ class Api::V2::EventsController < ApplicationController
 
                 olympics = []
 
-                e.olympics.group(:id).each do |o|
+                e.olympics.group(:id).order(:year).each do |o|
                     olympic_data = {
                         olympic_id: o.id,
                         season: o.season,
@@ -50,7 +50,7 @@ class Api::V2::EventsController < ApplicationController
         def build_event(e)
             olympics = []
 
-            e.olympics.group(:id).each do |o|
+            e.olympics.group(:id).order(:year).each do |o|
                 olympic_data = {
                     olympic_id: o.id,
                     season: o.season,

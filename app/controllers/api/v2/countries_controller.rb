@@ -28,7 +28,7 @@ class Api::V2::CountriesController < ApplicationController
 
                 olympics = []
 
-                c.olympics.each do |o|
+                c.olympics.order(:year).each do |o|
                     olympic_data = {
                         olympic_id: o.id,
                         year: o.year,
@@ -59,7 +59,7 @@ class Api::V2::CountriesController < ApplicationController
 
             olympics = []
 
-            c.olympics.each do |o|
+            c.olympics.order(:year).each do |o|
                 olympic_data = {
                     olympic_id: o.id,
                     year: o.year,
@@ -70,9 +70,8 @@ class Api::V2::CountriesController < ApplicationController
                 olympics << olympic_data
             end
 
-            obj[:results] = {}
 
-            obj[:results][c.id] = {
+            obj[c.id] = {
                 country_id: c.id,
                 country_name: c.country_name,
                 IOC_code: c.noc,

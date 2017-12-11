@@ -24,19 +24,7 @@ class Api::V2::AthletesController < ApplicationController
 
             athletes.each do |a|
 
-                olympics = []
                 medals = []
-
-                a.olympics.group(:id).each do |o|
-                    olympic_data = {
-                        olympic_id: o.id,
-                        city: o.city.city_name,
-                        season: o.season,
-                        year: o.year
-                    }
-
-                    olympics << olympic_data
-                end
 
                 a.medals.each do |m|
 
@@ -62,8 +50,7 @@ class Api::V2::AthletesController < ApplicationController
                     first_name: a.first_name,
                     last_name: a.last_name,
                     gender: a.gender,
-                    medals: medals,
-                    olympics: olympics
+                    medals: medals
                 }
 
                 obj[:results] << athlete_data
@@ -77,19 +64,7 @@ class Api::V2::AthletesController < ApplicationController
             obj = {}
             obj[:results] = {}
 
-            olympics = []
             medals = []
-
-            a.olympics.group(:id).each do |o|
-                olympic_data = {
-                    olympic_id: o.id,
-                    city: o.city.city_name,
-                    season: o.season,
-                    year: o.year
-                }
-
-                olympics << olympic_data
-            end
 
             a.medals.each do |m|
 
@@ -115,8 +90,7 @@ class Api::V2::AthletesController < ApplicationController
                 first_name: a.first_name,
                 last_name: a.last_name,
                 gender: a.gender,
-                medals: medals,
-                olympics: olympics
+                medals: medals
             }
 
             obj

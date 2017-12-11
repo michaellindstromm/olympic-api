@@ -94,7 +94,7 @@ section {
     overflow-x: scroll;
 }
 
-pre {
+pre.light-example-block {
     text-align: left;
     white-space: pre-line;
 }
@@ -233,7 +233,7 @@ pre.light-example-block {
 }
 
 .dropdown-item {
-    color: $dark-code-font;
+    color: black;
 }
 
 .dark-url-div {
@@ -261,26 +261,35 @@ pre.light-example-block {
 .dark-response-example,
 .dark-request-example {
     width: 90%;
-    min-height: 100px;
+    min-height: 150px;
     font-family: monospace;
 }
 
-.dark-response-example {
-    height: 50%;
-}
-
-.dark-line-count {
-    width: 3%;
-    border-radius: 3px 0 0 3px;
-    font-size: 0.9rem;
-}
-
+.dark-response-div,
 .dark-language-div {
-    width: 97%;
-    border-radius: 0 3px 3px 0;
+    width: 100%;
+    border-radius: 3px;
     font-size: 0.9rem;
+    white-space: nowrap;
+    overflow-x: scroll;
+}
+
+.dark-response-div {
+    max-height: none;
 }
 
 .onetwolineheight {
-    line-height: 1.2rem;
+    line-height: 1.4rem;
+}
+
+.string { color: #E94F64; }
+.number { color: #46CBDE; }
+.boolean { color: $dark-code-key; }
+.null { color: #E57254; }
+.key { color: $qmethod; }
+
+.dark-response-div pre {
+    overflow-x: scroll;
+    line-height: 1.4rem;
+    font-size: 0.7rem;
 }

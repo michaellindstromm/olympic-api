@@ -25,7 +25,7 @@ module Api::V2
                 sports.each do |s|
                     disciplines = []
 
-                    s.disciplines.each do |d|
+                    s.disciplines.order(:discipline_name).each do |d|
                         discipline_data = {
                             discipline_id: d.id,
                             discipline_name: d.discipline_name
@@ -48,7 +48,7 @@ module Api::V2
                 obj = {}
                 disciplines = {}
 
-                sport.disciplines.each do |d|
+                sport.disciplines.order(:discipline_name).each do |d|
                     disciplines[d.id] = {
                             discipline_id: d.id,
                             discipline_name: d.discipline_name
