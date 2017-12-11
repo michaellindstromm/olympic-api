@@ -200,6 +200,10 @@ function makeTheCall() {
             getNewToken();
         } else if (e.status === 404) {
             $('.dark-response-div pre').html('Please make a request to a valid endpoint.');
+
+        } else if (e.status === 429) {
+            $('.dark-response-div pre').html('Too many requests. Wooooah Nelly. Slow down there.');
+        
         }
     });
 }
