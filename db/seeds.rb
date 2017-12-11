@@ -334,95 +334,80 @@ csv.each do |row|
 
 end
 
-missing = []
 
-# POPULATE MEDALS TABLE
-csv_text = File.read(summer_data)
-csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+# # POPULATE MEDALS TABLE
+# csv_text = File.read(summer_data)
+# csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 
-csv.each do |row|
+# csv.each do |row|
 
-    sport = row['Sport']
-    discipline = row['Discipline']
-    event = row['Event']
-    gender = row['Gender']
-    noc = row['Country']
-    year = row['Year'].to_i
-    discipline_key = sport + discipline
-    first_name = '-'
-    last_name = '-'
-    if row['Athlete'].class != NilClass
+#     sport = row['Sport']
+#     discipline = row['Discipline']
+#     event = row['Event']
+#     gender = row['Gender']
+#     noc = row['Country']
+#     year = row['Year'].to_i
+#     discipline_key = sport + discipline
+#     first_name = '-'
+#     last_name = '-'
+#     if row['Athlete'].class != NilClass
 
-        name = row['Athlete'].split(", ")
-        if name[1].class == NilClass
-            first_name = '-'
-        else
-            first_name = name[1]
-        end
-        last_name = name[0]
+#         name = row['Athlete'].split(", ")
+#         if name[1].class == NilClass
+#             first_name = '-'
+#         else
+#             first_name = name[1]
+#         end
+#         last_name = name[0]
 
-    end
+#     end
 
-    m = Medal.new
-    m.rank = row['Medal']
-    m.event_id = Event.joins(:discipline).find_by('disciplines.discipline_name': discipline, 'events.event_name': event).id
-    m.athlete_id = Athlete.find_by(first_name: first_name, last_name: last_name, gender: gender).id
-    m.olympic_id = Olympic.find_by(year: year, season: 'Summer').id
-    m.country_id = Country.find_by(noc: noc).id
-    if m.save
-
-    else
-        missing << last_name
-        puts m.inspect
-        puts 'Summer'
-    end
+#     m = Medal.new
+#     m.rank = row['Medal']
+#     m.event_id = Event.joins(:discipline).find_by('disciplines.discipline_name': discipline, 'events.event_name': event).id
+#     m.athlete_id = Athlete.find_by(first_name: first_name, last_name: last_name, gender: gender).id
+#     m.olympic_id = Olympic.find_by(year: year, season: 'Summer').id
+#     m.country_id = Country.find_by(noc: noc).id
+#     m.save
     
 
-end
+# end
 
-csv_text = File.read(winter_data)
-csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+# csv_text = File.read(winter_data)
+# csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 
-csv.each do |row|
+# csv.each do |row|
 
-    sport = row['Sport']
-    discipline = row['Discipline']
-    event = row['Event']
-    gender = row['Gender']
-    noc = row['Country']
-    year = row['Year'].to_i
+#     sport = row['Sport']
+#     discipline = row['Discipline']
+#     event = row['Event']
+#     gender = row['Gender']
+#     noc = row['Country']
+#     year = row['Year'].to_i
 
-    discipline_key = sport + discipline
-    first_name = '-'
-    last_name = '-'
-    if row['Athlete'].class != NilClass
+#     discipline_key = sport + discipline
+#     first_name = '-'
+#     last_name = '-'
+#     if row['Athlete'].class != NilClass
 
-        name = row['Athlete'].split(", ")
-        if name[1].class == NilClass
-            first_name = '-'
-        else
-            first_name = name[1]
-        end
-        last_name = name[0]
+#         name = row['Athlete'].split(", ")
+#         if name[1].class == NilClass
+#             first_name = '-'
+#         else
+#             first_name = name[1]
+#         end
+#         last_name = name[0]
 
-    end
+#     end
 
     
-    m = Medal.new
-    m.rank = row['Medal']
-    m.event_id = Event.joins(:discipline).find_by('disciplines.discipline_name': discipline, 'events.event_name': event).id
-    m.athlete_id = Athlete.find_by(first_name: first_name, last_name: last_name, gender: gender).id
-    m.olympic_id = Olympic.find_by(year: year, season: 'Winter').id
-    m.country_id = Country.find_by(noc: noc).id
-    if m.save
-
-    else
-        missing << last_name
-        puts m.inspect
-        puts 'Winter'
-    end
+#     m = Medal.new
+#     m.rank = row['Medal']
+#     m.event_id = Event.joins(:discipline).find_by('disciplines.discipline_name': discipline, 'events.event_name': event).id
+#     m.athlete_id = Athlete.find_by(first_name: first_name, last_name: last_name, gender: gender).id
+#     m.olympic_id = Olympic.find_by(year: year, season: 'Winter').id
+#     m.country_id = Country.find_by(noc: noc).id
+#     m.save
     
     
-end
-
-puts missing
+# end
