@@ -343,52 +343,14 @@
                 </div>
             </div>
         </div>
-        <div class="col-4 container-fluid right-example pt-2 hidden">
-            <h3 class="dark-code-headers">Example AJAX Request</h3>
 
-            <div class="code-block-dark">
-                <pre><code><span class="qjquery">$</span>.<span class="qmethod">ajax</span>({
-                    &emsp;&emsp;<span class="qjquery">url</span>:<span class="qstring">"https://olympicapi.herokuapp.com/countries?page=2&per_page=5"</span>,
-                    &emsp;&emsp;<span class="qjquery">headers</span>: {
-                        &emsp;&emsp;&emsp;&emsp;<span class="qstring">'Authorization'</span>:<span class="qstring">'[JSON Web Token]'</span>,
-                        &emsp;&emsp;&emsp;&emsp;<span class="qstring">'Accept'</span>:<span class="qstring">'version=v2'</span>
-                    &emsp;&emsp;} 
-                }).<span class="qmethod">done</span>(<span class="qblue">function</span>(<span class="qjquery">res</span>) {
-                    &emsp;&emsp;<span class="qgreen">console</span>.<span class="qmethod">log</span>(<span class="qjquery">res</span>);
-                }); 
-                </code></pre>
-            </div>
-
-            <h3 class="dark-code-headers mt-4">Example Response</h3>
-            <div class="code-block-dark">
-                <pre><code>{
-                                                &emsp;&emsp;<span class="key">meta</span>: {
-                                                        &emsp;&emsp;&emsp;&emsp;<span class="key">pagination</span>: {
-                                                                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="key">page</span>: <span class="number">2</span>,
-                                                                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="key">per_page</span>: <span class="number">5</span>,
-                                                                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="key">total_objects</span>: <span class="number">218</span>,
-                                                                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="key">total_pages</span>: <span class="number">44</span>
-                                                        &emsp;&emsp;&emsp;&emsp;}
-                                                &emsp;&emsp;},
-                                                &emsp;&emsp;<span class="key">results</span>: {
-                                                        &emsp;&emsp;&emsp;&emsp;<span class="number">6</span>: {<span class="key">country_id</span>: <span class="number">6</span>, <span class="key">country_name</span>: "Algeria", <span class="key">olympics_hosted</span>: {...}},
-                                                        &emsp;&emsp;&emsp;&emsp;<span class="number">7</span>: {<span class="key">country_id</span>: <span class="number">7</span>, <span class="key">country_name</span>: "American Samoa", <span class="key">olympics_hosted</span>: {...}},
-                                                        &emsp;&emsp;&emsp;&emsp;<span class="number">8</span>: {<span class="key">country_id</span>: <span class="number">8</span>, <span class="key">country_name</span>: "Andorra", <span class="key">olympics_hosted</span>: {...}},
-                                                        &emsp;&emsp;&emsp;&emsp;<span class="number">9</span>: {<span class="key">country_id</span>: <span class="number">9</span>, <span class="key">country_name</span>: "Angola", <span class="key">olympics_hosted</span>: {...}},
-                                                        &emsp;&emsp;&emsp;&emsp;<span class="number">10</span>: {<span class="key">country_id</span>: <span class="number">10</span>, <span class="key">country_name</span>: "Antigua and Barbuda", <span class="key">olympics_hosted</span>: {...}}
-                                                &emsp;&emsp;}
-                                        }</code></pre>
-            </div>
-            
-        </div>
         <div class="col-4 right-example pt-2 px-0 mx-0">
-            <h3 class="text-muted pt-2 pb-4 text-center">Requests and Responses</h3>
-            <div class="mx-0 px-0 py-4 d-flex mb-4 dark-url-div">
+            <div class="mx-0 px-0 my-4 py-4 d-flex dark-url-div">
                 <div class="full-url"><span class="http-method mx-2">GET</span> <span class="root-url">https://olympicapi.herokuapp.com/api/</span><input class="dark-input-url m-0 p-0" value="countries?page=4&per_page=15"></input> <span class="endpoint-url"></span><span class="parameters-url"></span></div>
             </div>
 
             <div class="dark-dropdown-div d-flex justify-content-around px-4">
-                <div class="dropdown">
+                <div class="dropdown hidden">
                     <button class="btn btn-secondary dropdown-toggle dark-language-button dark-dropdowns-button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Language
                     </button>
@@ -406,7 +368,7 @@
                     </div>
                 </div>
 
-                <div class="dropdown">
+                <div class="dropdown hidden">
                     <button class="btn btn-secondary dropdown-toggle dark-language-button dark-dropdowns-button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Language
                     </button>
@@ -424,7 +386,7 @@
                     </div>
                 </div>
 
-                <div class="dropdown">
+                <div class="dropdown hidden">
                     <button class="btn btn-secondary dropdown-toggle dark-language-button dark-dropdowns-button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Language
                     </button>
@@ -442,7 +404,7 @@
                     </div>
                 </div>
 
-                <div class="dropdown">
+                <div class="dropdown hidden">
                     <button class="btn btn-secondary dropdown-toggle dark-language-button dark-dropdowns-button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Language
                     </button>
@@ -460,19 +422,36 @@
                     </div>
                 </div>
 
-            </div>
-            <button class="btn btn-secondary my-4">
-                Make the call.
-            </button>
-
+            </div>            
             
-            
-            <div class="code-dark-block dark-request-example">
-
+            <div class="dark-request-header mx-2 d-flex align-items-center justify-content-between">
+                <h5 class="text-muted ml-4 mb-4 my-auto">Request</h5>
+                <div class="dropdown mx-4 my-auto">
+                    <button class=" btn btn-secondary dropdown-toggle dark-language-button dark-dropdowns-button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Language
+                    </button>
+                    <div class="dropdown-menu dark-dropdowns dark-language-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">cURL</a>
+                        <a class="dropdown-item" href="#">Ruby</a>
+                        <a class="dropdown-item" href="#">Python</a>
+                        <a class="dropdown-item" href="#">Node</a>
+                    </div>
+                </div>
             </div>
 
-            <div class="code-dark-block dark-language-example">
+            <div class="dark-request-example my-4 mx-auto text-white d-flex">
+                <div class="code-block-dark dark-line-count mx-0 text-center onetwolineheight">
 
+                </div>
+                <div class="code-block-dark dark-language-div mx-0 onetwolineheight pl-2">
+                    
+                </div>
+            </div>
+
+            <h5 class="text-muted ml-4 my-4">Response</h5>
+
+            <div class="code-block-dark dark-response-example my-2 mx-auto">
+                Response
             </div>
 
         </div>

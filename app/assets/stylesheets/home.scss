@@ -19,6 +19,7 @@
     height: 100%;
     background-color: $right-background;
     box-shadow: -5px 5px 5px;
+    overflow-y: scroll;
 }
 
 
@@ -161,6 +162,10 @@ pre.light-example-block {
     color: $dark-code-subkey; 
 }
 
+.dark-code-font {
+    color: $dark-code-font;
+}
+
 .dark-code-headers {
     color: $dark-code-font;
 }
@@ -253,4 +258,29 @@ pre.light-example-block {
     box-sizing: border-box;
 }
 
+.dark-response-example,
+.dark-request-example {
+    width: 90%;
+    min-height: 100px;
+    font-family: monospace;
+}
 
+.dark-response-example {
+    height: 50%;
+}
+
+.dark-line-count {
+    width: 3%;
+    border-radius: 3px 0 0 3px;
+    font-size: 0.9rem;
+}
+
+.dark-language-div {
+    width: 97%;
+    border-radius: 0 3px 3px 0;
+    font-size: 0.9rem;
+}
+
+.onetwolineheight {
+    line-height: 1.2rem;
+}
