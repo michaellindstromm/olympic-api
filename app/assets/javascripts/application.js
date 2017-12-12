@@ -22,17 +22,17 @@ var example_request = {
     },
 
     cURL: 
-        `curl --include \\\ ~ [[URI_HOLDER]] ~ `, 
+        `curl -H 'Authorization: [TOKEN]' -H 'Accept: version=v2' ~ [[URI_HOLDER]] ~ `, 
 
-    Python: `from urllib2 import Request , urlopen ~ ~ request = Request ( [[URI_HOLDER]] ) ~ ~ response_body = urlopen ( request ) .read ( ) ~ print response_body ~ `,
+    Python: `from urllib2 import Request , urlopen ~ ~ request = Request ( [[URI_HOLDER]] , headers = ~ { 'Authorization' : '[TOKEN]' , 'Accept' : 'version=v2' } ) ~ ~ response_body = urlopen ( request ) .read ( ) ~ print response_body ~ `,
 
-    Ruby: `require 'rest_client' ~ ~ response = RestClient.get [[URI_HOLDER]] ~ puts response ~ `,
+    Ruby: `require 'rest_client' ~ ~ response = RestClient.get [[URI_HOLDER]] , headers = { 'Authorization' : '[TOKEN]' , 'Accept' : 'version=v2' } ~ puts response ~ `,
 
-    Node: `var request = require ( 'request' ) ; ~ ~ request ( [[URI_HOLDER]] , function ( error , response , body ) { ~ console.log ( 'Status:' , response.statusCode ) ; ~ console.log ( 'Headers:' , JSON.stringify ( response.headers ) ) ; ~ console.log ( 'Response:' , body ) ; ~ } ) ; ~`,
+    Node: `var request = require ( 'request' ) ; ~ ~ var options = { ~ url : [[URI_HOLDER]] , ~ headers : { ~ 'Authorization' : '[TOKEN]' , ~ 'Accept' : 'version=v2' ~ } ~ } ; ~ ~  function callback ( error , response , body ) { ~ console.log ( 'Status:' , response.statusCode ) ; ~ console.log ( 'Headers:' , JSON.stringify ( response.headers ) ) ; ~ console.log ( 'Response:' , body ) ; ~ } ~ ~ request ( options , callback ) ; ~`,
 
-    JavaScript: `var request = new XMLHttpRequest() ; ~ ~ request.open ( 'GET' , [[URI_HOLDER]] ) ; ~ ~ request.onreadystatechange = function ( ) { ~ if ( this.readyState === 4 ) { ~ console.log ( 'Status:' , this.status ) ; ~ console.log ( 'Headers:' , this.getAllResponseHeaders() ) ; ~ console.log ( 'Body:' , this.responseText ) ; ~ } ~ } ; ~ ~ request.send() ; ~`,
+    JavaScript: `var request = new XMLHttpRequest() ; ~ ~ request.open ( 'GET' , [[URI_HOLDER]] ) ; ~ request.setRequestHeader ( 'Authorization' , [TOKEN] ) ; ~ request.setRequestHeader ( 'Accept', 'version=v2' ) ; ~ ~ request.onreadystatechange = function ( ) { ~ if ( this.readyState === 4 ) { ~ console.log ( 'Status:' , this.status ) ; ~ console.log ( 'Headers:' , this.getAllResponseHeaders() ) ; ~ console.log ( 'Body:' , this.responseText ) ; ~ } ~ } ; ~ ~ request.send() ; ~`,
 
-    Java: `using System ; ~ ~ using System.Net.Http ; ~ ~ var baseAddress = new Uri ( [[URI_HOLDER]] ) ; ~ using ( var httpClient = new HttpClient { BaseAddress = baseAddress } ) { ~ ~ using ( var response = await httpClient.GetAsync( 'undefined' ) ) { ~ ~ string responseData = await response.Content.ReadAsStringAsync() ; ~ ~ } ~ } ~`
+    cSharp: `using System ; ~ ~ using System.Net.Http ; ~ ~ var baseAddress = new Uri ( [[URI_HOLDER]] ) ; ~ using ( var httpClient = new HttpClient { BaseAddress = baseAddress } ) { ~ ~ using ( var response = await httpClient.GetAsync ( 'undefined' ) ) { ~ ~ string responseData = await response.Content.ReadAsStringAsync() ; ~ ~ } ~ } ; ~`
 }
 
 var selection;
@@ -42,7 +42,6 @@ $(document).on('turbolinks:load', function () {
         getNewToken();
         homeListeners();
         selection = undefined;
-
     } else {
         formListeners();
     }
@@ -83,7 +82,13 @@ let homeListeners = function() {
         e.preventDefault();
 
         $(this).parent().siblings('.dark-dropdowns-button').text($(this).text());
-        $(this).parent().siblings('.dark-dropdowns-button').val($(this).text());
+        if ($(this).text() === "c#") {
+            $(this).parent().siblings('.dark-dropdowns-button').val('cSharp');
+
+        } else {
+            $(this).parent().siblings('.dark-dropdowns-button').val($(this).text());
+
+        }
 
         selection = $(this).parent().siblings('.dark-dropdowns-button').val();
 
@@ -253,35 +258,8 @@ function getNewToken() {
     }).done(function (res) {
         token = res.auth_token;
         makeTheCall();
-        populateResponseExample();
-        populateEndpointExample();
     });
 }
-
-function populateEndpointExample () {
-    $.ajax({
-        url: "/api/endpoints",
-        headers: {
-            'Authorization': token,
-            'Accept': 'version=v2'
-        }
-    }).done(function (res) {
-        $('.light-endpoint-example').html(syntaxHighlight(JSON.stringify(res, null, 4), true));
-    });
-
-};
-
-function populateResponseExample() {
-    $.ajax({
-        url: "/api/countries?page=2&per_page=5",
-        headers: {
-            'Authorization': token,
-            'Accept': 'version=v2'
-        }
-    }).done(function (res) {
-        $('.light-response-example').html(syntaxHighlight(JSON.stringify(res, null, 4), true));
-    });
-};
 
 function seeResponse(response) {
 

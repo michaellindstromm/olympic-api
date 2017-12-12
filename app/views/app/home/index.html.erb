@@ -7,7 +7,8 @@
                     <li a class="nav-item"><a class="nav-link" href="#access">Access</a></li>
                     <li a class="nav-item"><a class="nav-link" href="#versioning">Versioning</a></li>
                     <li a class="nav-item"><a class="nav-link" href="#errors">Errors</a></li>
-                    <li a class="nav-item dropdown"><a class="nav-link" href="#routes">Routes</a></li>
+                    <li a class="nav-item"><a class="nav-link" href="#routes">Routes</a></li>
+                    <li a class="nav-item"><a class="nav-link" href="#tryserver">Try Server</a></li>
                 </ul>
             </div>
             <div class="align-self-end text-center signUpButtonDiv">
@@ -33,7 +34,7 @@
                         <h3 class="my-2">Tokens</h3>
                         
 
-                        <p class="mt-4"><span style="font-weight:bold">Tokens expire every 2 hours</span>. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <code>/authenticate</code> <a href="#routes">endpoint</a>. Including in the body of your request the email and password used when signing up.</p> 
+                        <p class="mt-4"><span style="font-weight:bold">JSON Web Tokens expire every 2 hours</span>. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <code>/authenticate</code> <a href="#routes">endpoint</a>. Including in the body of your request the email and password used when signing up.</p> 
                         <p class="font-weight-bold">Note: this request does not require a token.</p>
 
                         <code class="mt-2">"email":"[YOUR EMAIL HERE]"</code>
@@ -46,7 +47,18 @@
 
                         <p class="my-4 font-weight-bold">This token must be provided in the header of every subsequent request: </p>
 
-                        <code class="my-4">"Authorization: [WEB TOKEN GOES HERE]"</code>
+                        <pre class="my-4 light-example-block">
+
+<span class="qjquery">$</span>.<span class="key">ajax</span>({
+    <span class="qjquery">url:</span> <span class="code-red">'https://olympicapi.herokuapp.com/api/sports/23'</span>,
+    <span class="qjquery">headers:</span> {
+        <span class="code-red" style="font-size:1.2rem">'Authorization'</span><span class="qjquery">:</span> <span class="code-red" style="font-size:1.2rem">[WEB TOKEN GOES HERE]</span>,
+        <span class="code-red">'Accept'</span><span class="qjquery">:</span> <span class="code-red">'version=v2'</span>
+    }
+}).<span class="key">done</span>((<span class="qjquery">res</span>) => {  
+    <span class="qgreen">console</span>.<span class="key">log</span>(<span class="qjquery">res</span>);
+});
+                        </pre>
 
                         <h3 class="my-4">Rate Throttling</h3>
                         <p>Requests are limited to 10 calls per 10 second period per IP Address. If you reach your rate limit you will see this response and will have to wait for your rate limit to reset.</p>
@@ -63,7 +75,18 @@
                         <p class="font-weight-bold">The default version will always be the most recent version, therefore without explicitly stating the version you want, if a new version is released your application may break.</p>
                         <p>To request a specific version of the API, simply add an <code>Accept</code> header to your request.</p>
                         
-                        <code class="my-2">"Accept: version=v2"</code>
+                        <pre class="my-4 light-example-block">
+                        
+<span class="qblue">$</span>.<span class="key">ajax</span>({
+    <span class="qblue">url:</span> <span class="code-red">'https://olympicapi.herokuapp.com/api/sports/23'</span>,
+    <span class="qblue">headers:</span> {
+        <span class="code-red">'Authorization'</span><span class="qblue">:</span> <span class="code-red">[WEB TOKEN]</span>,
+        <span class="code-red" style="font-size:1.2rem">'Accept'</span><span class="qblue">:</span> <span class="code-red" style="font-size:1.2rem">'version=v2'</span>
+    }
+}).<span class="key">done</span>((<span class="qblue">res</span>) => {  
+    <span class="qgreen">console</span>.<span class="key">log</span>(<span class="qblue">res</span>);
+});
+                        </pre>
 
 
                     </section>
@@ -153,7 +176,56 @@
                             <code>https://olympicapi.herokuapp.com/api/countries?page=2&per_page=5</code>
 
                             <div class="code-block mt-4">
-                            <pre class="light-example-block light-response-example"></pre>
+                            <pre class="light-example-block light-response-example">
+{
+    <span class="chrome-purple">"meta":</span> {
+        <span class="chrome-purple">"pagination":</span> {
+            <span class="chrome-purple">"page":</span> <span class="qblue">2</span>,
+            <span class="chrome-purple">"per_page":</span> <span class="qblue">5</span>,
+            <span class="chrome-purple">"total_pages":</span> <span class="qblue">44</span>,
+            <span class="chrome-purple">"total_objects":</span> <span class="qblue">218</span>
+        },
+        <span class="chrome-purple">"links":</span> {
+            <span class="chrome-purple">"first":</span> <span class="code-red">"https://olympicapi.herokuapp.com/api/countries?page=1&per_page=5"</span>,
+            <span class="chrome-purple">"last":</span> <span class="code-red">"https://olympicapi.herokuapp.com/api/countries?page=44&per_page=5"</span>,
+            <span class="chrome-purple">"next":</span> <span class="code-red">"https://olympicap.herokuapp.com/api/countries?page=3&per_page=5"</span>,
+            <span class="chrome-purple">"prev":</span> <span class="code-red">"https://olympicap.herokuapp.com/api/countries?page=1&per_page=5</span>"
+        }
+    },
+    <span class="chrome-purple">"results":</span> [
+        {
+            <span class="chrome-purple">"country_id":</span> <span class="qblue">6</span>,
+            <span class="chrome-purple">"country_name":</span> <span class="code-red">"Algeria"</span>,
+            <span class="chrome-purple">"IOC_code":</span> <span class="code-red">"ALG"</span>,
+            <span class="chrome-purple">"olympics_hosted":</span> []
+        },
+        {
+            <span class="chrome-purple">"country_id":</span> <span class="qblue">7</span>,
+            <span class="chrome-purple">"country_name":</span> <span class="code-red">"American Samoa"</span>,
+            <span class="chrome-purple">"IOC_code":</span> <span class="code-red">"ASA"</span>,
+            <span class="chrome-purple">"olympics_hosted":</span> []
+        },
+        {
+            <span class="chrome-purple">"country_id":</span> <span class="qblue">8</span>,
+            <span class="chrome-purple">"country_name":</span> <span class="code-red">"Andorra"</span>,
+            <span class="chrome-purple">"IOC_code":</span> <span class="code-red">"AND"</span>,
+            <span class="chrome-purple">"olympics_hosted":</span> []
+        },
+        {
+            <span class="chrome-purple">"country_id":</span> <span class="qblue">9</span>,
+            <span class="chrome-purple">"country_name":</span> <span class="code-red">"Angola"</span>,
+            <span class="chrome-purple">"IOC_code":</span> <span class="code-red">"ANG"</span>,
+            <span class="chrome-purple">"olympics_hosted":</span> []
+        },
+        {
+            <span class="chrome-purple">"country_id":</span> <span class="qblue">10</span>,
+            <span class="chrome-purple">"country_name":</span> <span class="code-red">"Antigua and Barbuda"</span>,
+            <span class="chrome-purple">"IOC_code":</span> <span class="code-red">"ANT"</span>,
+            <span class="chrome-purple">"olympics_hosted":</span> []
+        }
+    ]
+}
+                            </pre>
                             </div>
                         </div>
 
@@ -164,8 +236,21 @@
                             <p class="mt-4">This will return the following JSON object.</p>
 
                             <div class="code-block mt-4">
-                            <pre class="light-example-block light-endpoint-example"></pre>
+                                <pre class="light-example-block light-endpoint-example">
+{
+    <span class="chrome-purple">"sports":</span> <span class="code-red">"https://olympicapi.herokuapp.com/api/sports"</span>,
+    <span class="chrome-purple">"disciplines":</span> <span class="code-red">"https://olympicapi.herokuapp.com/api/disciplines"</span>,
+    <span class="chrome-purple">"events":</span> <span class="code-red">"https://olympicapi.herokuapp.com/api/events"</span>,
+    <span class="chrome-purple">"olympics":</span> <span class="code-red">"https://olympicapi.herokuapp.com/api/olympics"</span>,
+    <span class="chrome-purple">"countries":</span> <span class="code-red">"https://olympicapi.herokuapp.com/api/countries"</span>,
+    <span class="chrome-purple">"athletes":</span> <span class="code-red">"https://olympicapi.herokuapp.com/api/athletes"</span>,
+    <span class="chrome-purple">"medals":</span> <span class="code-red">"https://olympicapi.herokuapp.com/api/medals"</span>,
+    <span class="chrome-purple">"token":</span> <span class="code-red">"https://olympicapi.herokuapp.com/api/authenticate"</span>
+}                                
+                                </pre>
                             </div>
+
+                            <p class="my-4">The normal convention for RESTful API consumption is to store the endpoints in an <code class="code-red">endpoint_url</code> object, and call the endpoints by stating <code class="code-red">endpoint_url.[ENDPOINT] </code> For example, if you want sports simply call <code class="code-red">endpoint_url.sports</code>, or if you want athletes, call <code class="code-red">endpoint_url.athletes</code>.</p>
 
                             <h4 class="mt-4">POST</h4>
                             <table class="table endpoints-table">
@@ -289,6 +374,16 @@
                     
                 </div>
             </div>
+            <section id="tryserver">
+                <h3 class="display-4 mb-4">Try Server</h3>
+                <p>Use the area to the right to make requests, and see what kind of data you can get back. Simply type in the endpoint you want to view, hit [ENTER], and the results will display in the 'Response' section.</p>
+
+                <p>The 'Request' section has a dropdown that allows you to see how to make the call you are testing in select languages.</p>
+
+                <h2 class="">Enjoy!</h2>
+
+
+            </section>
         </div>
 
         <div class="col-4 right-example pt-2 px-0 mx-0">
@@ -308,7 +403,7 @@
                         <a class="dropdown-item" href="#">Ruby</a>
                         <a class="dropdown-item" href="#">Python</a>
                         <a class="dropdown-item" href="#">Node</a>
-                        <a class="dropdown-item" href="#">Java</a>
+                        <a class="dropdown-item" href="#">c#</a>
                     </div>
                 </div>
             </div>
