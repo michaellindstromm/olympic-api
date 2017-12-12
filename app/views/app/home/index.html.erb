@@ -1,6 +1,9 @@
 <div class="container-fluid">
         <div class="col-2 left-nav pt-2">
             <%= image_tag('Olympic-Rings.png', class: 'olympic-rings')%>
+            <div class="align-self-end text-center signUpButtonDiv">
+                <%= link_to 'Sign Up', sign_up_path, class: "btn-block btn-primary signUpButton py-2" %>
+            </div>
             <div class="navbar mb-4 pb-3" id="sidebar">
                 <ul class="nav nav-tabs d-flex flex-column align-content-start" role="tablist">
                     <li a class="nav-item"><a class="nav-link active" href="#overview">Overview</a></li>
@@ -10,9 +13,6 @@
                     <li a class="nav-item"><a class="nav-link" href="#routes">Routes</a></li>
                     <li a class="nav-item"><a class="nav-link" href="#tryserver">Try Server</a></li>
                 </ul>
-            </div>
-            <div class="align-self-end text-center signUpButtonDiv">
-                <%= link_to 'Sign Up', sign_up_path, class: "btn-block btn-primary signUpButton py-2" %>
             </div>
         </div>
         <div class="col-5 center-content pt-2">
@@ -377,11 +377,13 @@
             <hr>
             <section id="tryserver">
                 <h3 class="display-4 mb-4">Try Server</h3>
-                <p class="lead">Use the area to the right to make requests, and see what kind of data you can get back. Simply type in the endpoint you want to view, hit [ENTER], and the results will display in the 'Response' section.</p>
+                <p class="lead font-weight-bold">The area to the right is dedicated to trying out requests.</p>
 
-                <p class="lead">The 'Request' section has a dropdown that allows you to see how to make the call you are trying in select languages.</p>
+                <p>The black bar at the top allows you to type the endpoint you wish to access along with the subsequent parameters. Hit [ENTER], and the results will display in the <code>Response</code> section.</p>
 
-                <h2 class="">Enjoy!</h2>
+                <p>The <code>Request</code> section has a dropdown of select languages that allows you to see how to make your call.</p>
+
+                <h2>Enjoy!</h2>
 
 
             </section>

@@ -55,7 +55,7 @@
 }
 
 .nav-link {
-    color: grey;
+    color: $code-example-border;
 }
 
 .nav-link:hover {
@@ -71,18 +71,18 @@
 }
 
 .nav-item {
-    border-left: 2px solid grey;
+    border-left: 3px solid $code-example-border;
 }
 
 
 .nav-item > .nav-link.active {
-    margin-left: -2px;
+    margin-left: -3px;
     padding-left: 17px;
     padding-bottom: 9px;
     border: none;
     color: black;
     border-radius: 0px;
-    border-left: 2px solid black;
+    border-left: 3px solid black;
 }
 
 section {
