@@ -71,18 +71,18 @@
 }
 
 .nav-item {
-    border-left: 3px solid $code-example-border;
+    border-left: 2px solid $code-example-border;
 }
 
 
 .nav-item > .nav-link.active {
-    margin-left: -3px;
+    margin-left: -2px;
     padding-left: 17px;
     padding-bottom: 9px;
     border: none;
     color: black;
     border-radius: 0px;
-    border-left: 3px solid black;
+    border-left: 2px solid black;
 }
 
 section {
@@ -240,7 +240,7 @@ pre.light-example-block {
     width: 100%;
     // border-top: 1px solid $dark-divider;
     // border-bottom: $dark-divider;
-    box-shadow: 0 4px 10px black inset;
+    box-shadow: 0 2px 3px black inset;
 }
 
 .dark-dropdowns-button {
@@ -271,6 +271,7 @@ pre.light-example-block {
     font-size: 0.9rem;
     white-space: nowrap;
     overflow-x: scroll;
+    box-shadow: 0 2px 3px black inset;
 }
 
 .dark-response-div {
@@ -323,6 +324,11 @@ pre.light-example-block {
 .signUpButtonDiv {
     margin-top: 3rem;
     box-shadow: 0 3px 4px;
+}
+
+.formSignupDiv {
+    box-shadow: 0 3px 4px;
+    border-radius: 0.25rem;
 }
 
 #sidebar {

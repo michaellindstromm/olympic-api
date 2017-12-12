@@ -24,8 +24,9 @@
                 <%= f.label :password_confirmation %></br>
                 <%= f.password_field :password_confirmation, required: true, class: "form-control", id: "passwordConfirm", datamatch: "#password" %></br>
 
-
-                <%= f.submit 'Signup', class: 'btn btn-primary form-control firstTokenButton', disabled: true %>
+                <div class="formSignupDiv">
+                    <%= f.submit 'Signup', class: 'btn btn-primary form-control firstTokenButton', disabled: true %>
+                </div>
             </div>
         <% end %>
     </div>
