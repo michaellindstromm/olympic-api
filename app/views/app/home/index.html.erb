@@ -10,6 +10,9 @@
                     <li a class="nav-item dropdown"><a class="nav-link" href="#routes">Routes</a></li>
                 </ul>
             </div>
+            <div class="align-self-end text-center signUpButtonDiv">
+                <%= link_to 'Sign Up', sign_up_path, class: "btn-block btn-primary signUpButton py-2" %>
+            </div>
         </div>
         <div class="col-5 center-content pt-2">
             <div class="row">
@@ -22,16 +25,12 @@
                     <hr>
                     <section id="overview">
                         <h3 class="display-4">Overview</h3>
-                        <p class="lead">The Olympic API is architected around REST. All requests should be made over SSL. The API endpoints return data in JSON format. Current version requests return data about Olympics, Countries, Sports, Disciplines, Events, Athletes, and Medals.</p>
+                        <p class="lead">The Olympic API is architected around REST. All requests should be made over SSL. Endpoints return data in JSON format. Current version requests return data about Olympics, Countries, Sports, Disciplines, Events, Athletes, and Medals.</p>
                     </section>
                     <hr>
                     <section id="access">
                         <h3 class="display-4">Access</h3>
                         <h3 class="my-2">Tokens</h3>
-                        <p>Gain access to the endpoints by <%= link_to 'signing up', sign_up_path %>. Upon successful sign up, a JSON Web Token will be provided to you. This token must be provided in the header of every subsequent request like so: </p>
-
-                        
-                        <code class="my-4">"Authorization: [WEB TOKEN GOES HERE]"</code>
                         
 
                         <p class="mt-4"><span style="font-weight:bold">Tokens expire every 2 hours</span>. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <code>/authenticate</code> <a href="#routes">endpoint</a>. Including in the body of your request the email and password used when signing up.</p> 
@@ -44,6 +43,10 @@
 
                         
                         <code class="my-2 overflow-x">{"auth_token":"[YOUR NEW JSON WEB TOKEN]"}</code>
+
+                        <p class="my-4 font-weight-bold">This token must be provided in the header of every subsequent request: </p>
+
+                        <code class="my-4">"Authorization: [WEB TOKEN GOES HERE]"</code>
 
                         <h3 class="my-4">Rate Throttling</h3>
                         <p>Requests are limited to 10 calls per 10 second period per IP Address. If you reach your rate limit you will see this response and will have to wait for your rate limit to reset.</p>
@@ -60,7 +63,7 @@
                         <p class="font-weight-bold">The default version will always be the most recent version, therefore without explicitly stating the version you want, if a new version is released your application may break.</p>
                         <p>To request a specific version of the API, simply add an <code>Accept</code> header to your request.</p>
                         
-                        <code class="my-2">"Accept: version-v2"</code>
+                        <code class="my-2">"Accept: version=v2"</code>
 
 
                     </section>
@@ -139,7 +142,7 @@
 
                             <p class="my-4">Here is what an example end point with these parameters may look like:</p>
 
-                            <code>https://olympicapi.herokuapp.com/countries?page=2&per_page=30</code>
+                            <code>https://olympicapi.herokuapp.com/api/countries?page=2&per_page=30</code>
                         </div>
 
                         <div id="format">
@@ -147,26 +150,10 @@
 
                             <p>All responses are returned in JSON format with a <code>meta</code> and <code>results</code> key. The <code>meta</code> key will contain meta data about pagination including the page, results per page, total number of pages, and total number of records. The <code>results</code> key will contain the requested records.</p>
                             <p class="mb-4">Here is an example response to the following endpoint:</p>
-                            <code>https://olympicapi.herokuapp.com/countries?page=2&per_page=5</code>
+                            <code>https://olympicapi.herokuapp.com/api/countries?page=2&per_page=5</code>
 
                             <div class="code-block mt-4">
-                            <pre class="light-example-block"><code class="chrome-code">{
-                                                &emsp;&emsp;<span class="chrome-purple">meta</span>: {
-                                                        &emsp;&emsp;&emsp;&emsp;<span class="chrome-purple">pagination</span>: {
-                                                                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="chrome-purple">page</span>: <span class="qblue">2</span>
-                                                                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="chrome-purple">per_page</span>: <span class="qblue">5</span>,
-                                                                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="chrome-purple">total_objects</span>: <span class="qblue">218</span>,
-                                                                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="chrome-purple">total_pages</span>: <span class="qblue">44</span>
-                                                        &emsp;&emsp;&emsp;&emsp;}
-                                                &emsp;&emsp;},
-                                                &emsp;&emsp;<span class="chrome-purple">results</span>: {
-                                                        &emsp;&emsp;&emsp;&emsp;<span class="chrome-purple">6</span>: {<span class="chrome-purple">country_id</span>: <span class="qblue">6</span>, <span class="chrome-purple">country_name</span>: <span class="code-red">"Algeria"</span>, <span class="chrome-purple">olympics_hosted</span>:{...},
-                                                        &emsp;&emsp;&emsp;&emsp;<span class="chrome-purple">7</span>: {<span class="chrome-purple">country_id</span>: <span class="qblue">7</span>, <span class="chrome-purple">country_name</span>: <span class="code-red">"American Samoa"</span>, <span class="chrome-purple">olympics_hosted</span>:{...},
-                                                        &emsp;&emsp;&emsp;&emsp;<span class="chrome-purple">8</span>: {<span class="chrome-purple">country_id</span>: <span class="qblue">8</span>, <span class="chrome-purple">country_name</span>: <span class="code-red">"Andorra"</span>, <span class="chrome-purple">olympics_hosted</span>:{...},
-                                                        &emsp;&emsp;&emsp;&emsp;<span class="chrome-purple">9</span>: {<span class="chrome-purple">country_id</span>: <span class="qblue">9</span>, <span class="chrome-purple">country_name</span>: <span class="code-red">"Angola"</span>, <span class="chrome-purple">olympics_hosted</span>:{...},
-                                                        &emsp;&emsp;&emsp;&emsp;<span class="chrome-purple">10</span>: {<span class="chrome-purple">country_id</span>: <span class="qblue">10</span> <span class="chrome-purple">country_name</span>: <span class="code-red">"Antigua and Barbuda"</span>, <span class="chrome-purple">olympics_hosted</span>:{...}
-                                                &emsp;&emsp;}
-                                        }</code></pre>
+                            <pre class="light-example-block light-response-example"></pre>
                             </div>
                         </div>
 
@@ -177,19 +164,9 @@
                             <p class="mt-4">This will return the following JSON object.</p>
 
                             <div class="code-block mt-4">
-                            <pre class="light-example-block"><code class="chrome-code">{
-                                    &emsp;&emsp;<span class="chrome-purple">sports</span>: <span class="code-red">'https://olympicapi.herokuapp.com/api/sports'</span>,
-                                    &emsp;&emsp;<span class="chrome-purple">disciplines</span>: <span class="code-red">'https://olympicapi.herokuapp.com/api/disciplines'</span>,        
-                                    &emsp;&emsp;<span class="chrome-purple">events</span>: <span class="code-red">'https://olympicapi.herokuapp.com/api/events'</span>,        
-                                    &emsp;&emsp;<span class="chrome-purple">olympics</span>: <span class="code-red">'https://olympicapi.herokuapp.com/api/olympics'</span>,        
-                                    &emsp;&emsp;<span class="chrome-purple">countries</span>: <span class="code-red">'https://olympicapi.herokuapp.com/api/countries'</span>,        
-                                    &emsp;&emsp;<span class="chrome-purple">athletes</span>: <span class="code-red">'https://olympicapi.herokuapp.com/api/athletes'</span>,        
-                                    &emsp;&emsp;<span class="chrome-purple">medals</span>: <span class="code-red">'https://olympicapi.herokuapp.com/api/medals'</span>,
-                                    &emsp;&emsp;<span class="chrome-purple">token</span>: <span class="code-red">'https://olympicapi.herokuapp.com/api/authenticate'</span>        
-                                }</code></pre>
+                            <pre class="light-example-block light-endpoint-example"></pre>
                             </div>
 
-                            <p class="lead">https://olympicapi.herokuapp.com</p>
                             <h4 class="mt-4">POST</h4>
                             <table class="table endpoints-table">
                                 <thead>
@@ -291,13 +268,6 @@
                                         <td style="border-top:none"></td>
                                         <td><code>.athletes + '/id'</code></td>
                                         <td><code>id</code> as integer</td>
-                                        <td>Get a single athlete.</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border-top:none"></td>
-                                        <td><code>.athletes + '/id?search='</code></td>
-                                        <td><code>id</code> as integer
-                                        <p><code>search query</code> as string</p></td>
                                         <td>Get a single athlete.</td>
                                     </tr>
                                     <tr>

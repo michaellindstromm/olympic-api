@@ -4,6 +4,7 @@
 //= require bootstrap-sprockets
 //= require rails-ujs
 //= require turbolinks
+//= require flipclock.min
 //= require_tree .
 
 let request_uri = "'https://olympicapi.herokuapp.com/api/endpoints'"
@@ -34,14 +35,47 @@ var example_request = {
     Java: `using System ; ~ ~ using System.Net.Http ; ~ ~ var baseAddress = new Uri ( [[URI_HOLDER]] ) ; ~ using ( var httpClient = new HttpClient { BaseAddress = baseAddress } ) { ~ ~ using ( var response = await httpClient.GetAsync( 'undefined' ) ) { ~ ~ string responseData = await response.Content.ReadAsStringAsync() ; ~ ~ } ~ } ~`
 }
 
-$(document).ready(function() {
-    listeners();
-    getNewToken();
-});
-
 var selection;
 
-let listeners = function() {
+$(document).on('turbolinks:load', function () {
+    if (window.location.pathname === '/') {
+        getNewToken();
+        homeListeners();
+        selection = undefined;
+
+    } else {
+        formListeners();
+    }
+});
+
+function formListeners() {
+
+    $('#passwordConfirm').on('keyup', function(e) {
+        if ($(this).val().length > 7 && $(this).val() === $('#password').val()) {
+            $('.firstTokenButton').attr('disabled', false);
+        } else {
+            $('.firstTokenButton').attr('disabled', true);
+        }
+    });
+
+    var date = new Date("February 08, 2018 00:00:00"); //Month Days, Year HH:MM:SS
+    var now = new Date();
+    var diff = (date.getTime() / 1000) - (now.getTime() / 1000);
+
+    var clock = $('.clock').FlipClock(diff, {
+        clockFace: 'DailyCounter',
+        countdown: true
+    });
+};
+
+
+let homeListeners = function() {
+
+    $(document).on('turbolinks:click', function (event) {
+        if (event.target.getAttribute('href').charAt(0) === '#') {
+            return event.preventDefault()
+        }
+    })
 
     $('body').scrollspy({ target: '#sidebar' })
     
@@ -199,10 +233,10 @@ function makeTheCall() {
         if (e.status === 401) {
             getNewToken();
         } else if (e.status === 404) {
-            $('.dark-response-div pre').html('Please make a request to a valid endpoint.');
+            $('.dark-response-div pre').html('Please make a valid request.');
 
         } else if (e.status === 429) {
-            $('.dark-response-div pre').html('Too many requests. Wooooah Nelly. Slow down there.');
+            $('.dark-response-div pre').html('Wooooah Nelly. Slow down there.');
         
         }
     });
@@ -219,8 +253,35 @@ function getNewToken() {
     }).done(function (res) {
         token = res.auth_token;
         makeTheCall();
+        populateResponseExample();
+        populateEndpointExample();
     });
 }
+
+function populateEndpointExample () {
+    $.ajax({
+        url: "/api/endpoints",
+        headers: {
+            'Authorization': token,
+            'Accept': 'version=v2'
+        }
+    }).done(function (res) {
+        $('.light-endpoint-example').html(syntaxHighlight(JSON.stringify(res, null, 4), true));
+    });
+
+};
+
+function populateResponseExample() {
+    $.ajax({
+        url: "/api/countries?page=2&per_page=5",
+        headers: {
+            'Authorization': token,
+            'Accept': 'version=v2'
+        }
+    }).done(function (res) {
+        $('.light-response-example').html(syntaxHighlight(JSON.stringify(res, null, 4), true));
+    });
+};
 
 function seeResponse(response) {
 
@@ -228,18 +289,30 @@ function seeResponse(response) {
 
     $('.dark-response-div pre').html('');
 
-    $('.dark-response-div pre').append(syntaxHighlight(response_as_string));
+    $('.dark-response-div pre').append(syntaxHighlight(response_as_string, false));
 }
 
-function syntaxHighlight(json) {
+function syntaxHighlight(json, light) {
     json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
-        var cls = 'number';
+        if (light) {
+            var cls = 'qblue'
+        } else {
+            var cls = 'number';
+        }
         if (/^"/.test(match)) {
             if (/:$/.test(match)) {
-                cls = 'key';
+                if (light) {
+                    cls = 'chrome-purple'
+                } else {
+                    cls = 'key';
+                }
             } else {
-                cls = 'string';
+                if (light) {
+                    cls = 'code-red'
+                } else {
+                    cls = 'string';
+                }
             }
         } else if (/true|false/.test(match)) {
             cls = 'boolean';

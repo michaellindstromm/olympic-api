@@ -1,29 +1,49 @@
-<!-- app/views/users/new.html.erb -->
 
-<h1>Signup!</h1>
+<div class="header d-flex">
+    <%= link_to image_tag('back_arrow.png', width: "50px", height: "50px", class: "mt-4", style: "position:absolute;"), root_path, data: { 'no-turbolink' => true }, class: "ml-4" %>
+</div>
+    <h2 class="text-center mx-auto mt-4 mb-1 display-3">Signup</h2>
+
+<div class="container">
+
+    <div class="formAndToken">
+        <%= form_for :user, url: first_token_path, remote: true do |f| %>
+            <div class="col-md-8 mx-auto">
+                <%= f.label :first_name %></br>
+                <%= f.text_field  :first_name, required: true, class: "form-control" %></br>
+
+                <%= f.label :last_name %></br>
+                <%= f.text_field  :last_name, required: true, class: "form-control" %></br>
+
+                <%= f.label :email %></br>
+                <%= f.email_field :email, required: true, class: "form-control" %></br>
+
+                <%= f.label :password %></br>
+                <%= f.password_field :password, required: true, class: "form-control", id: "password", minlength: "8" %></br>
+
+                <%= f.label :password_confirmation %></br>
+                <%= f.password_field :password_confirmation, required: true, class: "form-control", id: "passwordConfirm", datamatch: "#password" %></br>
 
 
-
-<%= form_for :user, url: first_token_path, remote: true do |f| %>
-    <div class="col-md-8 mx-auto">
-        <%= f.label :first_name %></br>
-        <%= f.text_field  :first_name, required: true, class: "form-control" %></br>
-
-        <%= f.label :last_name %></br>
-        <%= f.text_field  :last_name, required: true, class: "form-control" %></br>
-
-        <%= f.label :email %></br>
-        <%= f.email_field :email, required: true, class: "form-control" %></br>
-
-        <%= f.label :password %></br>
-        <%= f.password_field :password, required: true, class: "form-control" %></br>
-
-        <%= f.label :password_confirmation %></br>
-        <%= f.password_field :password_confirmation, required: true, class: "form-control" %></br>
-
-
-        <%= f.submit 'Get First Token', class: 'btn btn-primary form-control' %>
+                <%= f.submit 'Signup', class: 'btn btn-primary form-control firstTokenButton', disabled: true %>
+            </div>
+        <% end %>
     </div>
-<% end %>
 
-<%= link_to 'Back', root_path %>
+    <div class="countdown-wrapper">
+        <%= image_tag('Olympic-Rings.png', width: '100%', height: '100%', objectFit: 'cover')%>
+
+        <div class="my-4 text-center mx-auto">
+            <h1 class="olympic-title text-center mx-auto">2018 Winter Olympics</h1> 
+            <h1 class="mb-4">Countdown</h1>
+        </div>
+
+        <div class="clock-div mt-4 pt-4">
+            <div class="clock">
+
+            </div>
+        </div>
+
+    </div>
+
+</div>

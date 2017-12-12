@@ -40,6 +40,9 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'activeadmin', github: 'activeadmin'
+gem 'sass-rails'
+gem 'uglifier'
+gem 'coffee-rails'
 gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 gem 'jwt'
 gem 'simple_command'
@@ -51,4 +54,4 @@ gem 'api-pagination'
 gem 'bootstrap'
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5.0.0'
-gem 'httparty'
+gem 'flipclockjs-rails', '~> 0.7.7', require: 'flipclockjs-rails'

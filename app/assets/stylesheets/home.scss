@@ -95,8 +95,7 @@ section {
 }
 
 pre.light-example-block {
-    text-align: left;
-    white-space: pre-line;
+    overflow-x: scroll;
 }
 
 .overflow-x {
@@ -130,7 +129,7 @@ pre.light-example-block {
 pre.light-example-block {
     padding: 0.2rem 0.4rem;
     font-size: 90%;
-    color: #bd4147;
+    color: $right-background;
     background-color: $light-code-block;
     border-radius: 0.25rem;
 }
@@ -291,5 +290,41 @@ pre.light-example-block {
 .dark-response-div pre {
     overflow-x: scroll;
     line-height: 1.4rem;
-    font-size: 0.7rem;
+    font-size: 0.9rem;
+    font-family: monospace;
+}
+
+.clock-div {
+    text-align: center;
+    margin-top: 5rem;
+}
+
+.clock {
+    display: inline-block;
+    width: auto;
+}
+
+.flip-clock-wrapper {
+    margin: 0 auto;
+    max-width: 620px;
+    margin-top: 2em;
+}
+
+// .olympic-title {
+//     width: 700px;
+//     background: -webkit-linear-gradient(right, blue, yellow, green, black, red);
+//     -webkit-background-clip: text;
+//     -webkit-text-fill-color: transparent;
+// }
+.signUpButton {
+    text-decoration: none !important;
+}
+
+.signUpButtonDiv {
+    margin-top: 3rem;
+    box-shadow: 0 3px 4px;
+}
+
+#sidebar {
+    margin-top: 2rem;
 }
