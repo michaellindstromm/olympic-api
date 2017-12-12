@@ -34,7 +34,7 @@
                         <h3 class="my-2">Tokens</h3>
                         
 
-                        <p class="mt-4"><span style="font-weight:bold">JSON Web Tokens expire every 2 hours</span>. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <code>/authenticate</code> <a href="#routes">endpoint</a>. Including in the body of your request the email and password used when signing up.</p> 
+                        <p class="mt-4"><span style="font-weight:bold">JSON Web Tokens expire every 2 hours</span>. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <code>/authenticate</code> <a href="#routes" style="text-decoration:none;">endpoint</a>. Including in the body of your request the email and password used when signing up.</p> 
                         <p class="font-weight-bold">Note: this request does not require a token.</p>
 
                         <code class="mt-2">"email":"[YOUR EMAIL HERE]"</code>
@@ -50,7 +50,7 @@
                         <pre class="my-4 light-example-block">
 
 <span class="qjquery">$</span>.<span class="key">ajax</span>({
-    <span class="qjquery">url:</span> <span class="code-red">'https://olympicapi.herokuapp.com/api/sports/23'</span>,
+    <span class="qjquery">url:</span> <span class="code-red">'https://olympicapi.herokuapp.com/api/athletes/19761'</span>,
     <span class="qjquery">headers:</span> {
         <span class="code-red" style="font-size:1.2rem">'Authorization'</span><span class="qjquery">:</span> <span class="code-red" style="font-size:1.2rem">[WEB TOKEN GOES HERE]</span>,
         <span class="code-red">'Accept'</span><span class="qjquery">:</span> <span class="code-red">'version=v2'</span>
@@ -78,7 +78,7 @@
                         <pre class="my-4 light-example-block">
                         
 <span class="qblue">$</span>.<span class="key">ajax</span>({
-    <span class="qblue">url:</span> <span class="code-red">'https://olympicapi.herokuapp.com/api/sports/23'</span>,
+    <span class="qblue">url:</span> <span class="code-red">'https://olympicapi.herokuapp.com/api/events?page=3&per_page=15'</span>,
     <span class="qblue">headers:</span> {
         <span class="code-red">'Authorization'</span><span class="qblue">:</span> <span class="code-red">[WEB TOKEN]</span>,
         <span class="code-red" style="font-size:1.2rem">'Accept'</span><span class="qblue">:</span> <span class="code-red" style="font-size:1.2rem">'version=v2'</span>
@@ -374,11 +374,12 @@
                     
                 </div>
             </div>
+            <hr>
             <section id="tryserver">
                 <h3 class="display-4 mb-4">Try Server</h3>
-                <p>Use the area to the right to make requests, and see what kind of data you can get back. Simply type in the endpoint you want to view, hit [ENTER], and the results will display in the 'Response' section.</p>
+                <p class="lead">Use the area to the right to make requests, and see what kind of data you can get back. Simply type in the endpoint you want to view, hit [ENTER], and the results will display in the 'Response' section.</p>
 
-                <p>The 'Request' section has a dropdown that allows you to see how to make the call you are testing in select languages.</p>
+                <p class="lead">The 'Request' section has a dropdown that allows you to see how to make the call you are trying in select languages.</p>
 
                 <h2 class="">Enjoy!</h2>
 
