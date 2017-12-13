@@ -57,8 +57,7 @@
     }
 }).<span class="key">done</span>((<span class="qjquery">res</span>) => {  
     <span class="qgreen">console</span>.<span class="key">log</span>(<span class="qjquery">res</span>);
-});
-                        </pre>
+});</pre>
 
                         <h3 class="my-4">Rate Throttling</h3>
                         <p>Requests are limited to 10 calls per 10 second period per IP Address. If you reach your rate limit you will see this response and will have to wait for your rate limit to reset.</p>
@@ -85,10 +84,7 @@
     }
 }).<span class="key">done</span>((<span class="qblue">res</span>) => {  
     <span class="qgreen">console</span>.<span class="key">log</span>(<span class="qblue">res</span>);
-});
-                        </pre>
-
-
+});</pre>
                     </section>
                     <hr>
                     <section id="errors">
@@ -224,8 +220,7 @@
             <span class="chrome-purple">"olympics_hosted":</span> []
         }
     ]
-}
-                            </pre>
+}</pre>
                             </div>
                         </div>
 
@@ -246,8 +241,7 @@
     <span class="chrome-purple">"athletes":</span> <span class="code-red">"https://olympicapi.herokuapp.com/api/athletes"</span>,
     <span class="chrome-purple">"medals":</span> <span class="code-red">"https://olympicapi.herokuapp.com/api/medals"</span>,
     <span class="chrome-purple">"token":</span> <span class="code-red">"https://olympicapi.herokuapp.com/api/authenticate"</span>
-}                                
-                                </pre>
+}</pre>
                             </div>
 
                             <p class="my-4">The normal convention for RESTful API consumption is to store the endpoints in an <code class="code-red">endpoint_url</code> object, and call the endpoints by stating <code class="code-red">endpoint_url.[ENDPOINT] </code> For example, if you want sports simply call <code class="code-red">endpoint_url.sports</code>, or if you want athletes, call <code class="code-red">endpoint_url.athletes</code>.</p>

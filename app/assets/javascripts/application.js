@@ -58,8 +58,29 @@ function formListeners() {
     $('.password_confirmation').on('keyup', function(e) {
         if ($(this).val().length > 7 && $(this).val() === $('.password').val()) {
             $('.firstTokenButton').attr('disabled', false);
+            $(this).siblings('.customLabel').css({'color':'#007bff'});
+            $(this).css({'border-color':'#007bff'});
+        } else if ($(this).val().length === 0) {
+            $('.firstTokenButton').attr('disabled', false);
+            $(this).siblings('.customLabel').css({'color':'#007bff'});
+            $(this).css({'border-color':'#007bff'});
         } else {
             $('.firstTokenButton').attr('disabled', true);
+            $(this).siblings('.customLabel').css({'color':'red'});
+            $(this).css({'border-color':'red'});
+        }
+    });
+
+    $('.password').on('keyup', function(e) {
+        if ($(this).val().length > 7 && $(this).val() === $('.password').val()) {
+            $(this).siblings('.customLabel').css({ 'color': '#007bff' });
+            $(this).css({ 'border-color': '#007bff' });
+        } else if ($(this).val().length === 0) {
+            $(this).siblings('.customLabel').css({ 'color': '#007bff' });
+            $(this).css({ 'border-color': '#007bff' });
+        } else {
+            $(this).siblings('.customLabel').css({ 'color': 'red' });
+            $(this).css({ 'border-color': 'red' });
         }
     });
 
