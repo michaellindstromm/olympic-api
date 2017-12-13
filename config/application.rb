@@ -31,6 +31,7 @@ module OlympicApi
     # Skip views, helpers and assets when generating a new resource.
     config.eager_load_paths += %W(#{Rails.root}/lib)
     config.api_only = true
+    config.middleware.use ActionDispatch::Flash
     config.middleware.use Rack::Attack
     config.middleware.insert_before ActionDispatch::Static, Rack::Cors do
       allow do

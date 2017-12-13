@@ -4,12 +4,17 @@
 </div>
     <h2 class="text-center mx-auto mt-4 mb-1 display-3">Signup</h2>
 
+
 <div class="container">
 
-    <div class="customForm">
-        <%= form_for :user, url: first_token_path, remote: true do |f| %>
-            <div class="col-md-8 mx-auto">
 
+    <div class="customForm">
+
+        <%= form_for :user, url: sign_up_path, remote: false do |f| %>
+            <div class="col-md-8 mx-auto">
+            <% if flash[:alert] %>
+                <div class=""> <%=flash[:alert]%> </div>
+            <% end %>
                 <div class="customNameDiv d-flex">
                     <div class="customInputDiv">
                         <%= f.text_field  :first_name, required: true, class: "customInput" %>

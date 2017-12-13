@@ -55,34 +55,34 @@ $(document).on('turbolinks:load', function () {
 function formListeners() {
 
     // Disables button only when passwords match so form can only be submitted with correct password because bootstraps for validator does the rest for the other fields.
-    $('.password_confirmation').on('keyup', function(e) {
-        if ($(this).val().length > 7 && $(this).val() === $('.password').val()) {
-            $('.firstTokenButton').attr('disabled', false);
-            $(this).siblings('.customLabel').css({'color':'#007bff'});
-            $(this).css({'border-color':'#007bff'});
-        } else if ($(this).val().length === 0) {
-            $('.firstTokenButton').attr('disabled', false);
-            $(this).siblings('.customLabel').css({'color':'#007bff'});
-            $(this).css({'border-color':'#007bff'});
-        } else {
-            $('.firstTokenButton').attr('disabled', true);
-            $(this).siblings('.customLabel').css({'color':'red'});
-            $(this).css({'border-color':'red'});
-        }
-    });
+    // $('.password_confirmation').on('keyup', function(e) {
+    //     if ($(this).val().length > 7 && $(this).val() === $('.password').val()) {
+    //         $('.firstTokenButton').attr('disabled', false);
+    //         $(this).siblings('.customLabel').css({'color':'#007bff'});
+    //         $(this).css({'border-color':'#007bff'});
+    //     } else if ($(this).val().length === 0) {
+    //         $('.firstTokenButton').attr('disabled', false);
+    //         $(this).siblings('.customLabel').css({'color':'#007bff'});
+    //         $(this).css({'border-color':'#007bff'});
+    //     } else {
+    //         $('.firstTokenButton').attr('disabled', true);
+    //         $(this).siblings('.customLabel').css({'color':'red'});
+    //         $(this).css({'border-color':'red'});
+    //     }
+    // });
 
-    $('.password').on('keyup', function(e) {
-        if ($(this).val().length > 7 && $(this).val() === $('.password').val()) {
-            $(this).siblings('.customLabel').css({ 'color': '#007bff' });
-            $(this).css({ 'border-color': '#007bff' });
-        } else if ($(this).val().length === 0) {
-            $(this).siblings('.customLabel').css({ 'color': '#007bff' });
-            $(this).css({ 'border-color': '#007bff' });
-        } else {
-            $(this).siblings('.customLabel').css({ 'color': 'red' });
-            $(this).css({ 'border-color': 'red' });
-        }
-    });
+    // $('.password').on('keyup', function(e) {
+    //     if ($(this).val().length > 7 && $(this).val() === $('.password').val()) {
+    //         $(this).siblings('.customLabel').css({ 'color': '#007bff' });
+    //         $(this).css({ 'border-color': '#007bff' });
+    //     } else if ($(this).val().length === 0) {
+    //         $(this).siblings('.customLabel').css({ 'color': '#007bff' });
+    //         $(this).css({ 'border-color': '#007bff' });
+    //     } else {
+    //         $(this).siblings('.customLabel').css({ 'color': 'red' });
+    //         $(this).css({ 'border-color': 'red' });
+    //     }
+    // });
 
     var date = new Date("February 08, 2018 00:00:00"); //Month Days, Year HH:MM:SS
     var now = new Date();
@@ -91,6 +91,12 @@ function formListeners() {
     var clock = $('.clock').FlipClock(diff, {
         clockFace: 'DailyCounter',
         countdown: true
+    });
+
+    $('.customInput').each(function(index, item) {
+        if ($(item).val().length > 0) {
+            $(item).siblings('.customLabel').addClass('is_active');
+        }
     });
 
     $('.customInput').on('focus', function(e) {

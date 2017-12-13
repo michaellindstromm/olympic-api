@@ -30,7 +30,7 @@ OlympicApi::Application.routes.draw do
     root 'home#index'
 
     get 'sign_up', to: 'users#new'
-    post 'first_token', to: 'users#create'
+    post 'sign_up', to: 'users#create'
     get 'api/endpoints', to: 'home#show'
     get 'token', to: 'users#show'
   end
