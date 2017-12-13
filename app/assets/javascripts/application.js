@@ -12,6 +12,7 @@ let base_uri = "'https://olympicapi.herokuapp.com/api/"
 let token;
 var selection;
 let count = 1
+var scrolling = false;
 
 // This object holds the example language requests that are formatted in the correct way. All characters and words are seperated by spaces, and line breaks are denoted by the '~' symbol. This object also holds the color options to colorized the out put correctly.
 

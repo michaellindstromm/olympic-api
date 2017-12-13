@@ -1,7 +1,8 @@
 html {
-    width: 102%;
-    overflow-x: hidden;
-
+    width: 100%;
+    // overflow-x: hidden;
+    -ms-overflow-style: overlay;
+    -webkit-overflow-scrolling: auto;
 }
 .left-nav {
     position: fixed;
@@ -18,13 +19,14 @@ html {
 
 .right-example {
     position: fixed;
-    max-width: 44%;
+    max-width: 45%;
     top: 0;
-    right: 0;
+    left: 56%;
     height: 100%;
     background-color: $right-background;
     box-shadow: -5px 5px 5px;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 
@@ -408,13 +410,16 @@ input:-webkit-autofill:active {
 
 /* Track */
 ::-webkit-scrollbar-track {
-    background: transparent; 
-    margin-right: 50px;
+    background: transparent;
+    width: 10px;
+    border-radius: 10px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #888; 
+    background: rgba(0, 0, 0, 0.5); 
+    border: 1px solid rgba(31, 31, 31, 0.30);
+    border-radius: 10px;
 }
 
 /* Handle on hover */
@@ -434,7 +439,15 @@ input:-webkit-autofill:active {
     width: 0;
 }
 
+.dark-language-div::-webkit-scrollbar,
 pre::-webkit-scrollbar {
-    height: 0;
+    height: 7px;
     background: transparent;
+}
+
+.dark-language-div::-webkit-scrollbar-thumb,
+pre::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.30); 
+    border: 1px solid rgba(31, 31, 31, 0.30);
+    border-radius: 10px;
 }
