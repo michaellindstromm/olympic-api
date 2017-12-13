@@ -54,8 +54,8 @@ $(document).on('turbolinks:load', function () {
 function formListeners() {
 
     // Disables button only when passwords match so form can only be submitted with correct password because bootstraps for validator does the rest for the other fields.
-    $('#passwordConfirm').on('keyup', function(e) {
-        if ($(this).val().length > 7 && $(this).val() === $('#password').val()) {
+    $('.password_confirmation').on('keyup', function(e) {
+        if ($(this).val().length > 7 && $(this).val() === $('.password').val()) {
             $('.firstTokenButton').attr('disabled', false);
         } else {
             $('.firstTokenButton').attr('disabled', true);
@@ -70,6 +70,19 @@ function formListeners() {
         clockFace: 'DailyCounter',
         countdown: true
     });
+
+    $('.customInput').on('focus', function(e) {
+        $(this).siblings('.customLabel').addClass('is_active');
+    });
+    
+    $('.customInput').on('blur', function(e) {
+        
+        if ($(this).val().length === 0) {
+            $(this).siblings('.customLabel').removeClass('is_active');
+        } 
+        
+    });
+
 };
 
 

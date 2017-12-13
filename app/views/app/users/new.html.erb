@@ -6,25 +6,38 @@
 
 <div class="container">
 
-    <div class="formAndToken">
+    <div class="customForm">
         <%= form_for :user, url: first_token_path, remote: true do |f| %>
             <div class="col-md-8 mx-auto">
-                <%= f.label :first_name %></br>
-                <%= f.text_field  :first_name, required: true, class: "form-control" %></br>
 
-                <%= f.label :last_name %></br>
-                <%= f.text_field  :last_name, required: true, class: "form-control" %></br>
+                <div class="customNameDiv d-flex">
+                    <div class="customInputDiv">
+                        <%= f.text_field  :first_name, required: true, class: "customInput" %>
+                        <%= f.label :first_name, class: "customLabel" %>
+                    </div>
 
-                <%= f.label :email %></br>
-                <%= f.email_field :email, required: true, class: "form-control" %></br>
+                    <div class="customInputDiv">
+                        <%= f.text_field  :last_name, required: true, class: "customInput" %>
+                        <%= f.label :last_name, class: "customLabel" %>
+                    </div>
+                </div>
 
-                <%= f.label :password %></br>
-                <%= f.password_field :password, required: true, class: "form-control", id: "password", minlength: "8" %></br>
+                <div class="customInputDiv">
+                    <%= f.email_field :email, required: true, class: "customInput"  %>
+                    <%= f.label :email, class: "customLabel" %>
+                </div>
 
-                <%= f.label :password_confirmation %></br>
-                <%= f.password_field :password_confirmation, required: true, class: "form-control", id: "passwordConfirm", datamatch: "#password" %></br>
+                <div class="customInputDiv">
+                    <%= f.password_field :password, required: true, class: "customInput password", minlength: "8" %>
+                    <%= f.label :password, class: "customLabel" %>
+                </div>
 
-                <div class="formSignupDiv">
+                <div class="customInputDiv">
+                    <%= f.password_field :password_confirmation, required: true, class: "customInput password_confirmation" %>
+                    <%= f.label :password_confirmation, class: "customLabel" %>
+                </div>
+
+                <div class="formSignupDiv mt-4">
                     <%= f.submit 'Signup', class: 'btn btn-primary form-control firstTokenButton', disabled: true %>
                 </div>
             </div>

@@ -56,6 +56,7 @@
 
 .nav-link {
     color: $code-example-border;
+    font-weight: 200;
 }
 
 .nav-link:hover {
@@ -228,6 +229,7 @@ pre.light-example-block {
 }
 
 .dark-dropdowns {
+    border-radius: 0;
     background: $dark-code-dropdown;
 }
 
@@ -244,7 +246,13 @@ pre.light-example-block {
 }
 
 .dark-dropdowns-button {
+    box-shadow: 0 2px 3px black;
+    border-radius: 0;
     width: 115px !important;
+}
+
+.btn {
+    border-radius: 0 !important;
 }
 
 .dark-input-url {
@@ -267,7 +275,7 @@ pre.light-example-block {
 .dark-response-div,
 .dark-language-div {
     width: 100%;
-    border-radius: 3px;
+    border-radius: 0;
     font-size: 0.9rem;
     white-space: nowrap;
     overflow-x: scroll;
@@ -328,9 +336,62 @@ pre.light-example-block {
 
 .formSignupDiv {
     box-shadow: 0 3px 4px;
-    border-radius: 0.25rem;
 }
 
 #sidebar {
     margin-top: 2rem;
+}
+
+.customInput {
+    padding: 0;
+    margin: 1.0rem auto;
+    height: 3rem;
+    outline: none;
+    border: none;
+    font-size: 1rem;
+    text-indent: 0.5rem;
+    border-bottom: 1px solid $code-example-border;
+    width: 100%;
+    transition: all .2s ease-out;
+}
+
+.customLabel {
+    position: absolute;
+    color: $code-example-border;
+    top: 1.6rem;
+    font-weight: 200;
+    left: 0;
+    font-size: 1rem;
+    padding-left: 1.3rem;
+    cursor: text;
+    transition: all .2s ease-out;
+}
+
+.customInputDiv {
+    position: relative;
+    margin-top: 1rem;
+    width: 100%;
+    padding: 0 1rem;
+    line-height: 1.5;
+}
+
+.customInput:focus {
+    border-bottom: 1px solid $form-input;
+    transition: border .2s ease-in-out;
+}
+
+.is_active {
+    top: 0.4rem;
+    padding-left: 1.5rem;
+    font-size: 0.8rem;
+    color: $form-input;
+    transition: all .2s ease-out;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-transition-delay: 9999s;
+    -webkit-transition: color 9999s ease-out, background-color 9999s ease-out;
 }
