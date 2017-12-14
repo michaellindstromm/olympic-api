@@ -13,14 +13,7 @@ module App
                 command = AuthenticateUser.call(@user.email, @user.password)
                 redirect_to token_url
             else
-                puts @user.errors.full_messages
-                puts 'SORRRRRYYYYYY'
-                flash[:alert] = "Your passwords do not match."
-                flash.each do |f|
-                    puts f
-                end
-                @true = true
-                @message = "message"
+                flash[:alert] = "Please ensure your passwords match."
                 render :new
             end
         end

@@ -349,6 +349,33 @@ pre.light-example-block {
     margin-top: 2rem;
 }
 
+.firstTokenButton {
+   border-radius: 0 !important;
+   padding: 0.375rem 0.75rem;
+}
+
+
+
+.alert {
+    border-radius: 0;
+    height: 100%;
+    width: 95%;
+    background: $alert-background;
+    color: $alert-font;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    
+}
+
+.alertDiv {
+    border-radius: 0;
+    margin-top: 0.8rem;
+    height: 50px;
+    width: 65%;
+    box-sizing: content-box;
+}
+
+    
+
 .customInput {
     padding: 0;
     margin: 1.0rem auto;
@@ -450,10 +477,4 @@ pre::-webkit-scrollbar-thumb {
     background: rgba(0, 0, 0, 0.30); 
     border: 1px solid rgba(31, 31, 31, 0.30);
     border-radius: 10px;
-}
-
-.alert {
-    width: 500px;
-    height: 500px;
-    background: red;
 }

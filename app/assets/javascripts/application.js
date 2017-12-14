@@ -42,6 +42,7 @@ var example_request = {
 // Have to use on 'turbolinks:load' instead of on 'ready', otherwise same page links will not load properly and the try server will not work when leaving and returning to index page without refresh. This calls the method to set the listeners and also to ready the try server.
 
 $(document).on('turbolinks:load', function () {
+
     if (window.location.pathname === '/') {
         getNewToken();
         homeListeners();
@@ -104,13 +105,24 @@ function formListeners() {
     });
     
     $('.customInput').on('blur', function(e) {
-        
         if ($(this).val().length === 0) {
             $(this).siblings('.customLabel').removeClass('is_active');
         } 
-        
     });
 
+    $('.field_with_errors .customInput').on('focus', function(e) {
+        $('.field_with_errors .customLabel').addClass('is_active');
+    });
+
+    $('.field_with_errors .customInput').on('blur', function (e) {
+        if ($(this).val().length === 0) {
+            $(this).parent().siblings('.field_with_errors').children('.customLabel').removeClass('is_active');
+        }
+    });
+
+    
+    $('.alert').delay(2700).fadeOut(1000);
+    
 };
 
 
