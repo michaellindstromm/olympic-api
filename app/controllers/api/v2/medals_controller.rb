@@ -35,6 +35,7 @@ class Api::V2::MedalsController < ApplicationController
                     event: Event.find(m.event_id).event_name,
                     year: olympics.year,
                     olympic_city: city.city_name,
+                    represented_country_id: m.country.id,
                     represented_country: m.country.country_name
                 }
                 obj[:results] << medal_data
