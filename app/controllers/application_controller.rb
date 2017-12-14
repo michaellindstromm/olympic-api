@@ -25,8 +25,8 @@ class ApplicationController < ActionController::Base
             links: {
                 first: "https://olympicapi.herokuapp.com/api/" + "#{controller}" + "?page=1&per_page=" + "#{params[:per_page] ? params[:per_page].to_i : 25}",
                 last: "https://olympicapi.herokuapp.com/api/" + "#{controller}" + "?page=" +  "#{results.total_pages}" + "&per_page=" + "#{params[:per_page] ? params[:per_page].to_i : 25}",
-                next: ("https://olympicap.herokuapp.com/api/" + "#{controller}" + "?page=" +  "#{params[:page] ? params[:page].to_i + 1 : 2}" + "&per_page=" + "#{params[:per_page] ? params[:per_page].to_i : 25}" if params[:page].to_i < results.total_pages),
-                prev: ("https://olympicap.herokuapp.com/api/" + "#{controller}" + "?page=" +  "#{params[:page].to_i - 1}" + "&per_page=" + "#{params[:per_page] ? params[:per_page].to_i : 25}" if params[:page].to_i > 1)
+                next: ("https://olympicapi.herokuapp.com/api/" + "#{controller}" + "?page=" +  "#{params[:page] ? params[:page].to_i + 1 : 2}" + "&per_page=" + "#{params[:per_page] ? params[:per_page].to_i : 25}" if params[:page].to_i < results.total_pages),
+                prev: ("https://olympicapi.herokuapp.com/api/" + "#{controller}" + "?page=" +  "#{params[:page].to_i - 1}" + "&per_page=" + "#{params[:per_page] ? params[:per_page].to_i : 25}" if params[:page].to_i > 1)
             }
         }
         obj
