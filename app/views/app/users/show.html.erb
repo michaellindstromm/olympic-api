@@ -1,12 +1,21 @@
 <div class="header d-flex">
     <%= link_to image_tag('back_arrow.png', width: "50px", height: "50px", class: "mt-4", style: "position:absolute;"), root_path, data: { 'no-turbolink' => true }, class: "ml-4" %>
 </div>
-    <h2 class="text-center mx-auto mt-4 mb-1 display-3">Thanks for Signing Up!</h2>
-
+    <% if !@auth %>
+        <h2 class="text-center mx-auto mt-4 mb-1 display-3">Thanks for Signing Up!</h2>
+    <% end %>
 <div class="container">
 
     <div class="formAndToken text-center my-4 lead">
-        Return to the Docs to see how to get your first token, and start building an awesome app!
+        <% if @auth %>
+
+            <h2 class="text-center mx-auto mt-4 mb-4 pb-4 display-3">A special token just for you!</h2>
+            <p class="lead mx-auto">Click anywhere in the box to copy.</p>
+            <div class="showToken"><%= @token %></div>
+            
+        <% else %>
+            <%= render 'token_form' %>
+        <% end %>
     </div>
 
     <div class="countdown-wrapper">

@@ -14,6 +14,7 @@ var selection;
 let count = 1;
 let failCount = 0;
 var scrolling = false;
+var toolTipTimer;
 
 // This object holds the example language requests that are formatted in the correct way. All characters and words are seperated by spaces, and line breaks are denoted by the '~' symbol. This object also holds the color options to colorized the out put correctly.
 
@@ -56,36 +57,6 @@ $(document).on('turbolinks:load', function () {
 // Listener specifically for the form, as to not load all home page listeners. These probably need to be allocated to their own file. For the future!
 function formListeners() {
 
-    // Disables button only when passwords match so form can only be submitted with correct password because bootstraps for validator does the rest for the other fields.
-    // $('.password_confirmation').on('keyup', function(e) {
-    //     if ($(this).val().length > 7 && $(this).val() === $('.password').val()) {
-    //         $('.firstTokenButton').attr('disabled', false);
-    //         $(this).siblings('.customLabel').css({'color':'#007bff'});
-    //         $(this).css({'border-color':'#007bff'});
-    //     } else if ($(this).val().length === 0) {
-    //         $('.firstTokenButton').attr('disabled', false);
-    //         $(this).siblings('.customLabel').css({'color':'#007bff'});
-    //         $(this).css({'border-color':'#007bff'});
-    //     } else {
-    //         $('.firstTokenButton').attr('disabled', true);
-    //         $(this).siblings('.customLabel').css({'color':'red'});
-    //         $(this).css({'border-color':'red'});
-    //     }
-    // });
-
-    // $('.password').on('keyup', function(e) {
-    //     if ($(this).val().length > 7 && $(this).val() === $('.password').val()) {
-    //         $(this).siblings('.customLabel').css({ 'color': '#007bff' });
-    //         $(this).css({ 'border-color': '#007bff' });
-    //     } else if ($(this).val().length === 0) {
-    //         $(this).siblings('.customLabel').css({ 'color': '#007bff' });
-    //         $(this).css({ 'border-color': '#007bff' });
-    //     } else {
-    //         $(this).siblings('.customLabel').css({ 'color': 'red' });
-    //         $(this).css({ 'border-color': 'red' });
-    //     }
-    // });
-
     var date = new Date("February 08, 2018 00:00:00"); //Month Days, Year HH:MM:SS
     var now = new Date();
     var diff = (date.getTime() / 1000) - (now.getTime() / 1000);
@@ -98,6 +69,10 @@ function formListeners() {
     $('.customInput').each(function(index, item) {
         if ($(item).val().length > 0) {
             $(item).siblings('.customLabel').addClass('is_active');
+        }
+
+        if ($(item).parent('.field_with_errors')) {
+            $(item).parent().siblings('.field_with_errors').children('.customLabel').addClass('is_active');
         }
     });
 
@@ -124,9 +99,33 @@ function formListeners() {
     
     $('.alert').delay(2700).fadeOut(1000);
     
+    $('.showToken').on('click', function(e) {
+
+        copyToClipboard($(this));
+
+        if ($('.toolTip').length) {
+            clearTimeout(toolTipTimer);
+            $('.toolTip').remove();
+        }
+
+        var $toolTip = $('<div class="toolTip">')
+        $toolTip.html('Copied to Clipboard!');
+        $(this).append($toolTip);
+
+        var toolTipTimer = setTimeout(function() {
+            $('.toolTip').remove();
+        }, 2000);
+
+    });
 };
 
-
+function copyToClipboard(element) {
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($(element).text()).select();
+    document.execCommand("copy");
+    $temp.remove();
+}
 // Listeners for index page
 let homeListeners = function() {
 

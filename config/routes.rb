@@ -33,6 +33,7 @@ OlympicApi::Application.routes.draw do
     post 'sign_up', to: 'users#create'
     get 'api/endpoints', to: 'home#show'
     get 'token', to: 'users#show'
+    post 'token', to: 'users#get_token'
   end
 
   post 'api/authenticate', to: 'authentication#authenticate'
