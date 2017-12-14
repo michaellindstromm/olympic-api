@@ -26,7 +26,7 @@ class AuthorizeApiRequest
 
         def user
             @user ||= User.find(decoded_auth_token[:user_id]) if decoded_auth_token
-            @user ||= errors.add(:token, 'Invalid token') && nil
+            @user ||= errors.add(:token, 'Invalid token', status: 406) && nil
         end
 
         # The 'decoded_auth_token' method calls the 'decode' method of the JsonWebToken
@@ -52,7 +52,7 @@ class AuthorizeApiRequest
             if headers['Authorization'].present?
                 return headers['Authorization'].split(' ').last
             else
-                errors.add(:token, 'Missing token')
+                errors.add(:token, 'Missing token', status: 405)
             end
             nil
         end

@@ -11,7 +11,8 @@ let request_uri = "'https://olympicapi.herokuapp.com/api/endpoints'"
 let base_uri = "'https://olympicapi.herokuapp.com/api/"
 let token;
 var selection;
-let count = 1
+let count = 1;
+let failCount = 0;
 var scrolling = false;
 
 // This object holds the example language requests that are formatted in the correct way. All characters and words are seperated by spaces, and line breaks are denoted by the '~' symbol. This object also holds the color options to colorized the out put correctly.
@@ -310,15 +311,17 @@ function makeTheCall() {
     }).done(function (res) {
         seeResponse(res);
     }).fail(function(e) {
-        // checks to see if unauthorized meaning the token as expired and then makes the call again
-        if (e.status === 401) {
-            getNewToken();
-        } else if (e.status === 404) {
-            $('.dark-response-div pre').html('Please make a valid request.');
-
-        } else if (e.status === 429) {
-            $('.dark-response-div pre').html('Wooooah Nelly. Slow down there.');
-        
+        failCount += 1
+        if (failCount < 5) {
+            // checks to see if unauthorized meaning the token as expired and then makes the call again
+            if (e.status === 401) {
+                getNewToken();
+            } else if (e.status === 404) {
+                $('.dark-response-div pre').html('Please make a valid request.');
+    
+            } else if (e.status === 429) {
+                $('.dark-response-div pre').html('Wooooah Nelly. Slow down there.');    
+            }
         }
     });
 }

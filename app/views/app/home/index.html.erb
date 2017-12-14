@@ -37,13 +37,13 @@
                         <p class="mt-4"><span style="font-weight:bold">JSON Web Tokens expire every 2 hours</span>. To recieve a new token and continually maintain access to the API, you must request a new token. To do this make a POST request to the <code>/authenticate</code> <a href="#routes" style="text-decoration:none;">endpoint</a>. Including in the body of your request the email and password used when signing up.</p> 
                         <p class="font-weight-bold">Note: this request does not require a token.</p>
 
-                        <code class="mt-2">"email":"[YOUR EMAIL HERE]"</code>
-                        <code class="mb-2">"password":"[YOUR PASSWORD HERE]"</code>
+                        <code class="mt-2" style="font-size:1rem;">"email":"[YOUR EMAIL HERE]"</code>
+                        <code class="mb-2" style="font-size:1rem;">"password":"[YOUR PASSWORD HERE]"</code>
 
                         <p class="mt-4">Once this request is made and your credentials are verified, you will recieve a response that looks like this, containing your new token.</p>
 
                         
-                        <code class="my-2 overflow-x">{"auth_token":"[YOUR NEW JSON WEB TOKEN]"}</code>
+                        <code class="my-2 overflow-x" style="font-size:1rem;">{"auth_token":"[YOUR NEW JSON WEB TOKEN]"}</code>
 
                         <p class="my-4 font-weight-bold">This token must be provided in the header of every subsequent request: </p>
 
@@ -62,7 +62,7 @@
                         <h3 class="my-4">Rate Throttling</h3>
                         <p>Requests are limited to 10 calls per 10 second period per IP Address. If you reach your rate limit you will see this response and will have to wait for your rate limit to reset.</p>
 
-                        <code>Rate limit reached. Please wait until throttle is reset.</code>
+                        <code style="font-size:1rem;">Rate limit reached. Please wait until throttle is reset.</code>
                         
 
                     </section>
@@ -93,36 +93,35 @@
                         <table class="table table-responsive errors-table">
                             <thead>
                                 <tr>
-                                    <th>Request</th>
+                                    <th>Status Code</th>
                                     <th>Error</th>
                                     <th>Corrective Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>POST</td>
-                                    <td><code>Invalid Credentials</code></td>
+                                    <td class="lead">401</td>
+                                    <td><code>Unauthorized</code></td>
                                     <td> - Verify your email and password are correct.</td>
                                 </tr>
                                 <tr>
-                                    <td>GET</td>
+                                    <td class="lead">404</td>
+                                    <td><code>Not Found</code></td>
+                                    <td> - The endpoint you are trying to reach does not exist.</td>
+                                </tr>
+                                <tr>
+                                    <td class="lead">405</td>
                                     <td><code>Missing Token</code></td>
                                     <td> - The <code>Authorization</code> header is missing or misspelled.</td>
                                 </tr>
                                 <tr>
-                                    <td>GET</td>
+                                    <td class="lead">406</td>
                                     <td><code>Invalid Token</code></td>
                                     <td> - Verify your token is correct.
                                     <p> - Make a <code>POST</code> request for a new token.</p></td>
                                 </tr>
                                 <tr>
-                                    <td>GET</td>
-                                    <td><code>Not Authorized</code></td>
-                                    <td> - Verify your token is correct.
-                                    <p> - Make a <code>POST</code> request for a new token.</p></td>
-                                </tr>
-                                <tr>
-                                    <td>GET</td>
+                                    <td class="lead">429</td>
                                     <td><code>Rate Limit Reached</code></td>
                                     <td> - Wait until rate limit resets.</td>
                                 </tr>
@@ -161,7 +160,7 @@
 
                             <p class="my-4">Here is what an example end point with these parameters may look like:</p>
 
-                            <code>https://olympicapi.herokuapp.com/api/countries?page=2&per_page=30</code>
+                            <code style="font-size:1rem;">https://olympicapi.herokuapp.com/api/countries?page=2&per_page=30</code>
                         </div>
 
                         <div id="format">
@@ -169,7 +168,7 @@
 
                             <p>All responses are returned in JSON format with a <code>meta</code> and <code>results</code> key. The <code>meta</code> key will contain meta data about pagination including the page, results per page, total number of pages, and total number of records. The <code>results</code> key will contain the requested records.</p>
                             <p class="mb-4">Here is an example response to the following endpoint:</p>
-                            <code>https://olympicapi.herokuapp.com/api/countries?page=2&per_page=5</code>
+                            <code style="font-size:1rem;">https://olympicapi.herokuapp.com/api/countries?page=2&per_page=5</code>
 
                             <div class="code-block mt-4">
                             <pre class="light-example-block light-response-example">
@@ -227,7 +226,7 @@
                         <div id="endpoints">
                             <h3 class="mt-4">Endpoints</h3>
                             <p>Data is accessible through the following endpoints. To recieve the endpoints simply make a request to:</p>
-                            <code class="my-4">https://olympicapi.herokuapp.com/api/endpoints</code>
+                            <code class="my-4" style="font-size:1rem;">https://olympicapi.herokuapp.com/api/endpoints</code>
                             <p class="mt-4">This will return the following JSON object.</p>
 
                             <div class="code-block mt-4">
@@ -387,7 +386,7 @@
 
         <div class="col-4 right-example pt-2 px-0 mx-0">
             <div class="mx-0 px-0 mb-4 mt-2 py-4 dark-url-div">
-                <div class="full-url"><span class="http-method mx-2">GET</span> <span class="root-url">https://olympicapi.herokuapp.com/api/</span><input class="dark-input-url m-0 p-0" value="endpoints"></input> <span class="endpoint-url"></span><span class="parameters-url"></span></div>
+                <div class="full-url"><span class="http-method mx-2">GET</span> <span class="root-url">https://olympicapi.herokuapp.com/api/</span><input class="dark-input-url m-0 p-0" value="olympics?page=3&per_page=18"></input> <span class="endpoint-url"></span><span class="parameters-url"></span></div>
             </div>           
             
             <div class="dark-request-header mx-2 d-flex align-items-center justify-content-between">
