@@ -10,6 +10,7 @@
                     <li a class="nav-item"><a class="nav-link" href="#access">Access</a></li>
                     <li a class="nav-item"><a class="nav-link" href="#versioning">Versioning</a></li>
                     <li a class="nav-item"><a class="nav-link" href="#statusCodes">HTTP Status</a></li>
+                    <li a class="nav-item"><a class="nav-link" href="#format">Format</a></li>
                     <li a class="nav-item"><a class="nav-link" href="#routes">Routes</a></li>
                     <li a class="nav-item"><a class="nav-link" href="#tryserver">Try Server</a></li>
                 </ul>
@@ -105,6 +106,11 @@
                                     <td> - No actions necessary. Good work!</td>
                                 </tr>
                                 <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
                                     <td class="lead">401</td>
                                     <td><code>Unauthorized</code></td>
                                     <td> - Verify your email and password are correct.</td>
@@ -131,17 +137,22 @@
                                     <td> - Wait until rate limit resets.</td>
                                 </tr>
                                 <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
                                     <td class="lead">500</td>
                                     <td><code>Unexpected Server Error</code></td>
-                                    <td> - Sorry. We will work on fixing it as quickly as possible.</td>
+                                    <td> - Our bad. We will fix it as quickly as possible.</td>
                                 </tr>
                             </tbody>
                         </table>
 
                     </section>
                     <hr>
-                    <section id="routes">
-                        <h3 class="display-4 mb-4">Routes</h3>
+                    <section id="format">
+                        <h3 class="display-4 mb-4">Format</h3>
                         <div id="pagination">
                             <h3>Pagination</h3>
                             <p class="mt-4">All requests for multiple records are paginated.</p>
@@ -174,7 +185,7 @@
                         </div>
 
                         <div id="format">
-                            <h3 class="my-4">Format</h3>
+                            <h3 class="my-4">Structure</h3>
 
                             <p>All responses are returned in JSON format with a <code>meta</code> and <code>results</code> key. The <code>meta</code> key will contain meta data about pagination including the page, results per page, total number of pages, and total number of records. The <code>results</code> key will contain the requested records.</p>
                             <p class="mb-4">Here is an example response to the following endpoint:</p>
@@ -232,6 +243,14 @@
 }</pre>
                             </div>
                         </div>
+
+                    </section>
+
+                        <hr>
+
+                    <section id="routes">
+
+                        <h3 class="display-4 mb-4">Routes</h3>
 
                         <div id="endpoints">
                             <h3 class="mt-4">Endpoints</h3>
