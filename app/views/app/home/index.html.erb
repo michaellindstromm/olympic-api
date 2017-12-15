@@ -9,7 +9,7 @@
                     <li a class="nav-item"><a class="nav-link active" href="#overview">Overview</a></li>
                     <li a class="nav-item"><a class="nav-link" href="#access">Access</a></li>
                     <li a class="nav-item"><a class="nav-link" href="#versioning">Versioning</a></li>
-                    <li a class="nav-item"><a class="nav-link" href="#errors">Errors</a></li>
+                    <li a class="nav-item"><a class="nav-link" href="#statusCodes">HTTP Status</a></li>
                     <li a class="nav-item"><a class="nav-link" href="#routes">Routes</a></li>
                     <li a class="nav-item"><a class="nav-link" href="#tryserver">Try Server</a></li>
                 </ul>
@@ -49,18 +49,18 @@
 
                         <pre class="my-4 light-example-block">
 
-<span class="qjquery">$</span>.<span class="key">ajax</span>({
-    <span class="qjquery">url:</span> <span class="code-red">'https://olympicapi.herokuapp.com/api/athletes/19761'</span>,
-    <span class="qjquery">headers:</span> {
-        <span class="code-red" style="font-size:1.2rem">'Authorization'</span><span class="qjquery">:</span> <span class="code-red" style="font-size:1.2rem">[WEB TOKEN GOES HERE]</span>,
-        <span class="code-red">'Accept'</span><span class="qjquery">:</span> <span class="code-red">'version=v2'</span>
+<span class="qblue">$</span>.<span class="key">ajax</span>({
+    <span class="qblue">url:</span> <span class="code-red">'https://olympicapi.herokuapp.com/api/athletes/19761'</span>,
+    <span class="qblue">headers:</span> {
+        <span class="code-red" style="font-size:1.2rem">'Authorization'</span><span class="qblue">:</span> <span class="code-red" style="font-size:1.2rem">[WEB TOKEN GOES HERE]</span>,
+        <span class="code-red">'Accept'</span><span class="qblue">:</span> <span class="code-red">'version=v2'</span>
     }
-}).<span class="key">done</span>((<span class="qjquery">res</span>) => {  
-    <span class="qgreen">console</span>.<span class="key">log</span>(<span class="qjquery">res</span>);
+}).<span class="key">done</span>((<span class="qblue">res</span>) => {  
+    <span class="qgreen">console</span>.<span class="key">log</span>(<span class="qblue">res</span>);
 });</pre>
 
                         <h3 class="my-4">Rate Throttling</h3>
-                        <p>Requests are limited to 10 calls per 10 second period per IP Address. If you reach your rate limit you will see this response and will have to wait for your rate limit to reset.</p>
+                        <p>Requests are limited to 200 calls per minute. The rate limit is calculated over a sliding 1 minute period. Meaning if you make 200 calls in the 30 seconds, as long as you did not make any calls in the previous 30 seconds, your rate limit will not be reached. If you reach your rate limit you will see this <code>429</code> response and will have to wait for your rate limit to reset.</p>
 
                         <code style="font-size:1rem;">Rate limit reached. Please wait until throttle is reset.</code>
                         
@@ -87,18 +87,23 @@
 });</pre>
                     </section>
                     <hr>
-                    <section id="errors">
-                        <h3 class="display-4 mb-4">Errors</h3>
+                    <section id="statusCodes">
+                        <h3 class="display-4 mb-4">HTTP Status Codes</h3>
                         
                         <table class="table table-responsive errors-table">
                             <thead>
                                 <tr>
                                     <th>Status Code</th>
-                                    <th>Error</th>
-                                    <th>Corrective Actions</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <tr>
+                                    <td class="lead">200</td>
+                                    <td><code>Successful Request</code></td>
+                                    <td> - No actions necessary. Good work!</td>
+                                </tr>
                                 <tr>
                                     <td class="lead">401</td>
                                     <td><code>Unauthorized</code></td>
@@ -124,6 +129,11 @@
                                     <td class="lead">429</td>
                                     <td><code>Rate Limit Reached</code></td>
                                     <td> - Wait until rate limit resets.</td>
+                                </tr>
+                                <tr>
+                                    <td class="lead">500</td>
+                                    <td><code>Unexpected Server Error</code></td>
+                                    <td> - Sorry. We will work on fixing it as quickly as possible.</td>
                                 </tr>
                             </tbody>
                         </table>

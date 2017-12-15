@@ -13,12 +13,7 @@ module App
                 command = AuthenticateUser.call(@user.email, @user.password)
                 redirect_to token_url
             else
-                puts "hello #{@user.errors.messages}"
-                if @user.errors.messages[:email]
-                    flash[:alert] = "Email is already taken. Please try again."
-                else 
-                    flash[:alert] = "Please ensure your passwords match."
-                end
+                flash[:alert] = @user.errors.full_messages.to_sentence
                 render :new
             end
         end

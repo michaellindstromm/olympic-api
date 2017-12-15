@@ -71,7 +71,7 @@ function formListeners() {
             $(item).siblings('.customLabel').addClass('is_active');
         }
 
-        if ($(item).parent('.field_with_errors')) {
+        if ($(item).parent('.field_with_errors') && $(item).val().length > 0) {
             $(item).parent().siblings('.field_with_errors').children('.customLabel').addClass('is_active');
         }
     });
@@ -97,7 +97,7 @@ function formListeners() {
     });
 
     
-    $('.alert').delay(2700).fadeOut(1000);
+    $('.alert').delay(5000).fadeOut(1000);
     
     $('.showToken').on('click', function(e) {
 
