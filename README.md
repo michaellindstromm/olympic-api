@@ -59,7 +59,7 @@ This will return a JSON Web Token which will look something like this.
 
 Get some data.
 ```
-curl -H "Authorization: eyJ0eXAiOiKHV1QiLCJhbGbpErJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjF1NjA2NTgxODZ9.xsSwcPC22IR71OBv6bU_OGCSyfE81DvEzWfDU0iybMA" -H "Accept: version=v2" http://localhost:3000/sports
+curl -H "Authorization: eyJ0eXAiOiKHV1QiLCJhbGbpErJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjF1NjA2NTgxODZ9.xsSwcPC22IR71OBv6bU_OGCSyfE81DvEzWfDU0iybMA" -H "Accept: version=v2" http://localhost:3000/api/sports
 ```
 
 
