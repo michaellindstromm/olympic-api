@@ -1,4 +1,4 @@
-# Olympic-API ![alt text](https://github.com/michaellindstromm/olympic-api/blob/master/app/assets/images/olympic_icon.png)
+# Olympic-API 
 
 The Olympic API allows developers to access historical olympic data from 1896 - 2014. The API was built with Ruby on Rails, and architected strictly around REST principles. Users can sign up, which grants access by way of JSON Web Tokens. Full documentation is provided including endpoints, error handling, access, and a dedicated try server. The try server allows for real time requests to the database. 
 
@@ -78,3 +78,4 @@ curl -H "Authorization: eyJ0eXAiOiKHV1QiLCJhbGbpErJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ
 
 Visit [https://olympicapi.herokuapp.com](https://olympicapi.herokuapp.com) to view documentation and learn more about the API.
 
+![alt text](https://github.com/michaellindstromm/olympic-api/blob/master/app/assets/images/olympic_icon.png)
