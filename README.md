@@ -70,5 +70,5 @@ curl -H "Authorization: eyJ0eXAiOiKHV1QiLCJhbGbpErJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ
 
 ## Live
 
-Visit [https://olympicapi.com](https://olympicapi.com) to view documentation and learn more about the API.
+Visit [https://olympicapi.herokuapp.com](https://olympicapi.herokuapp.com) to view documentation and learn more about the API.
 
